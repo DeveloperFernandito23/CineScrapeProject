@@ -17,12 +17,12 @@ namespace DataExtractor
 			Microsoft.Playwright.Program.Main(new[] { "install" });
 
 			using var playwright = await Playwright.CreateAsync();
-			await using var browser = await playwright.Chromium.LaunchAsync(new() { Headless = false });
+			await using var browser = await playwright.Firefox.LaunchAsync(new() { Headless = false });
 			var page = await browser.NewPageAsync();
 
-			//await GetUrls(page, $"{MAINURL}/browse/movies_in_theaters/");
+			await GetUrls(page, $"{MAINURL}/browse/movies_in_theaters/");
 			await GetUrls(page, $"{MAINURL}/browse/movies_at_home/?page=5");
-			//await GetUrls(page, $"{MAINURL}/browse/movies_coming_soon/");
+			await GetUrls(page, $"{MAINURL}/browse/movies_coming_soon/");
 
 			await MovieDetails(page);
 		}
@@ -62,7 +62,9 @@ namespace DataExtractor
 
 				await GetInfo(page, movie);
 
-				await GetTrailer(page, movie);
+				//await GetTrailer(page, movie);
+
+				await GetPlatforms(page, movie);
 			}
 
 			Console.WriteLine(urlList.Count);
@@ -122,14 +124,36 @@ namespace DataExtractor
 
 			Console.WriteLine($", Crítica: {movie.RateCritic}, Audiencia: {movie.RateAudience}");
 		}
+		public static async Task GetPlatforms(IPage page, Movie movie)
+		{
+			IElementHandle platformsContainer = await page.QuerySelectorAsync("bubbles-overflow-container");
 
+			if (platformsContainer != null)
+			{
+				string selector = "container => container.shadowRoot.querySelectorAll('slot')[0].assignedNodes()";
+
+				var length = await platformsContainer.EvaluateHandleAsync($"{selector}.length");
+
+				for (int i = 0; i < int.Parse(length.ToString()); i++)
+				{
+					if (i % 2 != 0)
+					{
+						var platform = await platformsContainer.EvaluateHandleAsync($"{selector}[{i}].shadowRoot.querySelector('slot[name = \"bubble\"]').assignedNodes()[0].shadowRoot.querySelector('affiliate-icon').shadowRoot.querySelector('img').getAttribute('alt')");
+
+						movie.Platforms.Add(platform.ToString());
+					}
+				}
+			}
+		}
 		public static async Task GetTrailer(IPage page, Movie movie)
 		{
-			IElementHandle videoContainer = await page.QuerySelectorAsync("#hero-image");
+			IElementHandle buttonContainer = await page.QuerySelectorAsync("#hero-image");
 
-			await videoContainer.EvaluateAsync("container => container.shadowRoot.querySelector('slot[name = \"tile\"]').assignedNodes()[0].shadowRoot.querySelector('slot').assignedNodes()[1].shadowRoot.querySelector('slot[name = \"imageAction\"]').assignedNodes()[0].click()");
+			await buttonContainer.EvaluateAsync("container => container.shadowRoot.querySelector('slot[name = \"tile\"]').assignedNodes()[0].shadowRoot.querySelector('slot').assignedNodes()[1].shadowRoot.querySelector('slot[name = \"imageAction\"]').assignedNodes()[0].click()");
 
-			Console.WriteLine("");
+			IElementHandle videoContainer = await page.QuerySelectorAsync("overlay-base.visible");
+
+			var link = await videoContainer.EvaluateHandleAsync("container => container.shadowRoot.querySelector('slot[name = \"content\"]').assignedNodes()[0].shadowRoot.querySelector('slot[name = \"content\"]').assignedNodes()[1].querySelector('video').getAttribute('src')");
 		}
 		public static async Task AcceptCookies(IPage page)
 		{
