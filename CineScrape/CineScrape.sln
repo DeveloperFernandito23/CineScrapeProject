@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataExtractor", "DataExtractor\DataExtractor.csproj", "{FEA4D58C-2D1C-4EF6-B8D2-BEA0E7C4B51C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataExtractor", "DataExtractor\DataExtractor.csproj", "{FEA4D58C-2D1C-4EF6-B8D2-BEA0E7C4B51C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CineScrapeProject", "CineScrapeProject\CineScrapeProject.csproj", "{7A74CEAB-3621-4241-9F08-545EC1A74891}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{FEA4D58C-2D1C-4EF6-B8D2-BEA0E7C4B51C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEA4D58C-2D1C-4EF6-B8D2-BEA0E7C4B51C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEA4D58C-2D1C-4EF6-B8D2-BEA0E7C4B51C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A74CEAB-3621-4241-9F08-545EC1A74891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A74CEAB-3621-4241-9F08-545EC1A74891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A74CEAB-3621-4241-9F08-545EC1A74891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A74CEAB-3621-4241-9F08-545EC1A74891}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

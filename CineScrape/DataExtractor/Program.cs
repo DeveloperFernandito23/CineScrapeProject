@@ -1,12 +1,13 @@
 ﻿using Microsoft.Playwright;
 using System.Text.Json;
 
+
 namespace DataExtractor
 {
 	public class Program
 	{
 		public const string MAINURL = "https://www.rottentomatoes.com";
-		public const string PATH = "../../../../Data/movies.json";
+		public const string PATH = "../../../../CineScrapeProject/wwwroot/sample-data/movies.json";
 		public const int NUMPAGE = 5;
 
 		public static List<string> urlList = new();
