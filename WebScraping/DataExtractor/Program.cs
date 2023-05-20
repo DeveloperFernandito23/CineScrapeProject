@@ -85,7 +85,7 @@ namespace DataExtractor
 
 			string e = JsonSerializer.Serialize<List<Movie>>(movies);
 
-			File.WriteAllText("../../../../data/frutas.json", e);
+			File.WriteAllText("../../../../data/movies.json", e);
 
 			Console.WriteLine(urlList.Count);
 		}
