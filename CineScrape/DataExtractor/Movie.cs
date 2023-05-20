@@ -10,6 +10,7 @@ namespace DataExtractor
 	{
 		private string _title;
 		private string _posterURL;
+		private string _trailer;
 		private int? _rateCritic;
 		private int? _rateAudience;
 		private List<string> _platforms = new();
@@ -21,6 +22,7 @@ namespace DataExtractor
 
 		public string Title { get => _title; set => _title = value; }
 		public string PosterURL { get => _posterURL; set => _posterURL = value; }
+		public string Trailer { get => _trailer; set => _trailer = value; }
 		public int? RateCritic { get => _rateCritic; set => _rateCritic = value; }
 		public int? RateAudience { get => _rateAudience; set => _rateAudience = value; }
 		public List<string> Platforms { get => _platforms; set => _platforms = value; }
