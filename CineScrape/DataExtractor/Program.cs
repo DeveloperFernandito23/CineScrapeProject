@@ -6,12 +6,16 @@ namespace DataExtractor
 {
 	public class Program
 	{
+		public const int NUMPAGE = 5;
 		public const string MAINURL = "https://www.rottentomatoes.com";
 		public const string PATH = "../../../../CineScrapeProject/wwwroot/sample-data/movies.json";
-		public const int NUMPAGE = 5;
+		public const string DEFAULTREVIEWURL = "https://images.fandango.com/cms/assets/5b6ff500-1663-11ec-ae31-05a670d2d590--rtactordefault.png";
+		public const string DEFAULTCASTURL = "https://images.fandango.com/cms/assets/b0cefeb0-b6a8-11ed-81d8-51a487a38835--poster-default-thumbnail.jpg";
+		public const string DEFAULTREVIEWURLNEW = "https://pbs.twimg.com/profile_images/1249207089987301376/IM529qEB_400x400.jpg";
+		public const string DEFAULTCASTURLNEW = "https://img.redbull.com/images/c_crop,x_1676,y_0,h_1310,w_1048/c_fill,w_860,h_1075/q_auto:low,f_auto/redbullcom/2023/2/22/qpctvo5nspffj1vgy3a1/red-bull-click-cabecera";
 
-		public static List<string> urlList = new();
-		public static List<Movie> movies = new List<Movie>();
+		public static List<string> _urlList = new();
+		public static List<Movie> _movies = new();
 
 		public static async Task Main() => await RottenTomatoesAsync();
 		public static async Task RottenTomatoesAsync()
@@ -32,7 +36,7 @@ namespace DataExtractor
 		{
 			await page.GotoAsync(url);
 
-			if (urlList.Count == 0) await AcceptCookiesRTAsync(page);
+			if (_urlList.Count == 0) await AcceptCookiesRTAsync(page);
 
 			IReadOnlyList<IElementHandle> movieContainer = await page.QuerySelectorAllAsync(".js-tile-link");
 
@@ -47,16 +51,22 @@ namespace DataExtractor
 					urlMovie = await newUrl.GetAttributeAsync("href");
 				}
 
-				urlList.Add(urlMovie);
+				_urlList.Add(urlMovie);
 			}
 		}
 		public static async Task MovieDetailsAsync(IPage page)
 		{
-			foreach (string url in urlList)
+			int id = 1;
+
+			foreach (string url in _urlList)
 			{
 				Movie movie = new();
 
+				movie.Id = id++;
+
 				string newUrl = $"{MAINURL}{url}";
+
+				//string newUrl = "https://www.rottentomatoes.com/m/the_super_mario_bros_movie";
 
 				await page.GotoAsync(newUrl);
 
@@ -78,10 +88,10 @@ namespace DataExtractor
 
 				await GetTrailerAsync(page, movie);
 
-				movies.Add(movie);
+				_movies.Add(movie);
 			}
 
-			string moviesJSON = JsonSerializer.Serialize<List<Movie>>(movies);
+			string moviesJSON = JsonSerializer.Serialize<List<Movie>>(_movies);
 
 			File.WriteAllText(PATH, moviesJSON);
 		}
@@ -143,8 +153,12 @@ namespace DataExtractor
 				Cast cast = new Cast();
 
 				var image = await castData.QuerySelectorAsync("img");
-				cast.UrlPhoto = await image.GetAttributeAsync("src");
-				cast.Name= await image.GetAttributeAsync("alt");
+
+				string urlPhoto = await image.GetAttributeAsync("src");
+				cast.UrlPhoto = CheckCastImage(urlPhoto);
+
+				string name = await image.GetAttributeAsync("alt");
+				cast.Name = name;
 
 				var characterContainer = await castData.QuerySelectorAsync("div > p");
 				string character = await characterContainer.InnerTextAsync();
@@ -154,7 +168,7 @@ namespace DataExtractor
 				Console.WriteLine();
 				movie.Casts.Add(cast);
 			}
-			
+
 		}
 		public static async Task GetPhotosAsync(IPage page, Movie movie)
 		{
@@ -202,9 +216,17 @@ namespace DataExtractor
 				{
 					if (i % 2 != 0)
 					{
-						var platform = await platformsContainer.EvaluateHandleAsync($"{selector}[{i}].shadowRoot.querySelector('slot[name = \"bubble\"]').assignedNodes()[0].shadowRoot.querySelector('affiliate-icon').shadowRoot.querySelector('img').getAttribute('alt')");
+						Platform platform = new Platform();
 
-						movie.Platforms.Add(platform.ToString());
+						var platformContainer = await platformsContainer.EvaluateHandleAsync($"{selector}[{i}].shadowRoot.querySelector('slot[name = \"bubble\"]').assignedNodes()[0].shadowRoot.querySelector('affiliate-icon').shadowRoot.querySelector('img')");
+
+						string image = await platformContainer.EvaluateAsync<string>("container => container.getAttribute('src')");
+						platform.Image = $"{MAINURL}{image}";
+
+						string name = await platformContainer.EvaluateAsync<string>("container => container.getAttribute('alt')");
+						platform.Name = name;
+
+						movie.Platforms.Add(platform);
 					}
 				}
 			}
@@ -225,10 +247,11 @@ namespace DataExtractor
 
 				await FillReviewAsync(reviewsContainer, movie);
 			}
-
 		}
 		public static async Task FillReviewAsync(IElementHandle reviewsContainer, Movie movie)
 		{
+			Thread.Sleep(1000);
+
 			IReadOnlyList<IElementHandle> reviews = await reviewsContainer.QuerySelectorAllAsync(".review-row");
 
 			foreach (IElementHandle reviewData in reviews)
@@ -236,7 +259,8 @@ namespace DataExtractor
 				Review review = new Review();
 
 				var image = await reviewData.QuerySelectorAsync(".critic-picture");
-				review.UrlImage = await image.GetAttributeAsync("src");
+				string urlImage = await image.GetAttributeAsync("src");
+				review.UrlImage = CheckReviewImage(urlImage);
 
 				var name = await reviewData.QuerySelectorAsync(".display-name");
 				string nameText = await name.InnerHTMLAsync();
@@ -255,12 +279,14 @@ namespace DataExtractor
 
 				movie.Reviews.Add(review);
 			}
+
+			Console.WriteLine("gg");
 		}
 		public static async Task GetTrailerAsync(IPage page, Movie movie)
 		{
 			await page.GotoAsync("https://www.youtube.com/");
 
-			if (movies.Count == 0) await AcceptCookiesYTAsync(page);
+			if (_movies.Count == 0) await AcceptCookiesYTAsync(page);
 
 			IElementHandle search = await page.QuerySelectorAsync("input#search");
 			await search.TypeAsync($"TRAILER OFFICIAL {movie.Title}");
@@ -298,6 +324,7 @@ namespace DataExtractor
 
 			await acceptCookies.ClickAsync();
 		}
+
 		public static string CheckCharacter(string character)
 		{
 			string result = "";
@@ -327,5 +354,7 @@ namespace DataExtractor
 			return result;
 		}
 		public static string CheckURL(string url) => url.Split('?')[1].Substring(2, 11);
+		public static string CheckReviewImage(string urlImage) => urlImage == DEFAULTREVIEWURL ? DEFAULTREVIEWURLNEW : urlImage;
+		public static string CheckCastImage(string urlImage) => urlImage == DEFAULTCASTURL ? DEFAULTCASTURLNEW : urlImage;
 	}
 }

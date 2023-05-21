@@ -19,12 +19,5 @@ namespace CineScrapeProject.Pages
 {
     public partial class Index
     {
-        private static List<Movie> _movies = new();
-
-        public static List<Movie> Movies { get => _movies; set => _movies = value; }
-        protected override async Task OnInitializedAsync()
-        {
-            Movies = await Http.GetFromJsonAsync<List<Movie>>("sample-data/movies.json");
-        }
     }
 }

@@ -1,9 +1,100 @@
-﻿@page "/movies/{movieName}"
-@inject HttpClient Http
+﻿@page "/movies/{movieId}"
+@inject HttpClient Http 
 
-<PageTitle>@MovieName | CineScrape</PageTitle>
+<PageTitle>@Movie.Title | CineScrape</PageTitle>
 
-<h1>Hola @Movie.Title</h1>
+<div id="main-page">
+	<div id="header-page">
+		<div id="poster-container">
+			<img src="@Movie.PosterURL" />
+		</div>
+		<div id="principal-info">
+			<div id="title-container">
+				<p>@Movie.Title</p>
+				<div id="rate">
+					<p id="rate-critic">@Movie.RateCritic</p>
+					<p id="rate-audience">@Movie.RateAudience</p>
+				</div>
+			</div>
+			<div id="trailer-container">
+				<iframe id="trailer" src="@Movie.Trailer" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</div>
+	<div id="platforms-description">
+		<div id="platforms-container">
+			@foreach (var item in Movie.Platforms)
+			{
+				<div class="platform">
+					<img class="platform-image" src="@item.Image" />
+					<p class="platform-name">@item.Name</p>
+				</div>
+			}
+		</div>
+		<div id="description-container">
+			<p id="description">@Movie.Description</p>
+		</div>
+	</div>
+	<div id="characteristics">
+		<ul id="characteristics-container">
+			@foreach (var item in Movie.Characteristics)
+			{
+				<li class="characteristic">
+					<p class="characteristic-name">@item.Key</p>
+					<p class="characteristic-value">@item.Value</p>
+				</li>
+			}
+		</ul>
+	</div>
+	<div id="photos">
+		@foreach (var item in Movie.Photos)
+		{
+			<img class="photo" src="@item" />
+		}
+	</div>
+	<div id="casts">
+		@foreach (var item in Movie.Casts)
+		{
+			<div class="cast">
+				<img class="cast-photo" src="@item.UrlPhoto" />
+				<p class="cast-name">@item.Name</p>
+				<p class="cast-character">@item.Character</p>
+			</div>
+		}
+	</div>
+	<div id="reviews">
+		<table id="table">
+			<thead id="table-head">
+				<tr>
+					<th>Image</th>
+					<th>Name</th>
+					<th>Review</th>
+					<th>Full Review</th>
+					<th>Publish Date</th>
+				</tr>
+				<tr>
+					<th></th>
+					<th><InputText @bind-Value="SearchValue"/></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody id="table-body">
+				@foreach (var item in Reviews)
+				{
+					<tr class="review-row">
+						<td class="review-photo"><img src="@item.UrlImage" /></td>
+						<td class="review-name">@item.Name</td>
+						<td class="review-message">@item.Message</td>
+						<td class="review-fullreview"><a href="@item.FullReview">Full Review</a></td>
+						<td class="review-date">@item.Date</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
 
 
 
