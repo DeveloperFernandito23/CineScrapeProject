@@ -9,7 +9,8 @@ namespace CineScrapeProject.Pages
 		private List<Movie> _movies = new List<Movie>();
 		private Movie _movie = new Movie();
 		private List<Review> _reviews = new List<Review>();
-		private string _searchValue;
+		private string _searchName;
+		private string _searchDescription;
 
 		[Parameter]
 		public string MovieId { get; set; }
@@ -17,7 +18,8 @@ namespace CineScrapeProject.Pages
 		public Movie Movie { get => _movie; set => _movie = value; }
 		public List<Movie> Movies { get => _movies; set => _movies = value; }
 		public List<Review> Reviews { get => _reviews; set => _reviews = value; }
-		public string SearchValue { get => _searchValue; set { _searchValue = value; GetReviews(value); } }
+		public string SearchName { get => _searchName; set { _searchName = value; GetReviews(value, "name"); } }
+		public string SearchDescription { get => _searchDescription; set { _searchDescription = value; GetReviews(value, "message"); } }
 
 		protected override async Task OnInitializedAsync() => Movies = await Http.GetFromJsonAsync<List<Movie>>("sample-data/movies.json");
 		protected override async Task OnParametersSetAsync()
@@ -43,26 +45,40 @@ namespace CineScrapeProject.Pages
 
 			return movie;
 		}
-		private async Task GetReviews(string value)
+		private void GetReviews(string value, string option)
+		{
+			if (value != "")
+			{
+				Reviews = CheckOption(value, option);
+			}
+			else
+			{
+				Reviews = Movie.Reviews;
+			}
+		}
+		private List<Review> CheckOption(string value, string option)
 		{
 			List<Review> reviews = new List<Review>();
 
-			if (value != "")
+			foreach (Review review in Movie.Reviews)
 			{
-				foreach (Review review in Movie.Reviews)
+				if (option == "name")
 				{
-					if (review.Name.Contains(value))
+					if (review.Name.ToUpper().Contains(value.ToUpper()))
+					{
+						reviews.Add(review);
+					}
+				}
+				else
+				{
+					if (review.Message.ToUpper().Contains(value.ToUpper()))
 					{
 						reviews.Add(review);
 					}
 				}
 			}
-			else
-			{
-				reviews = Movie.Reviews;
-			}
 
-			Reviews = reviews;
+			return reviews;
 		}
 	}
 }

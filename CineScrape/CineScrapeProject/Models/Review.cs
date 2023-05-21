@@ -1,4 +1,6 @@
-﻿namespace CineScrapeProject.wwwroot.Models
+﻿using System.Text.Json.Serialization;
+
+namespace CineScrapeProject.wwwroot.Models
 {
 	public class Review
 	{
@@ -8,10 +10,19 @@
 		private string _fullReview;
 		private string _date;
 
+		[JsonPropertyName("url_image")]
 		public string UrlImage { get => _urlImage; set => _urlImage = value; }
+
+		[JsonPropertyName("name")]
 		public string Name { get => _name; set => _name = value; }
+
+		[JsonPropertyName("message")]
 		public string Message { get => _message; set => _message = value; }
+
+		[JsonPropertyName("full_review")]
 		public string FullReview { get => _fullReview; set => _fullReview = value; }
+
+		[JsonPropertyName("date")]
 		public string Date { get => _date; set => _date = value; }
 	}
 }

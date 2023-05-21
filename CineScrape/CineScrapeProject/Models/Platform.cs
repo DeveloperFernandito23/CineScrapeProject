@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CineScrapeProject.wwwroot.Models
@@ -11,7 +12,10 @@ namespace CineScrapeProject.wwwroot.Models
         private string _image;
         private string _name;
 
-        public string Image { get => _image; set => _image = value; }
-        public string Name { get => _name; set => _name = value; }
-    }
+		[JsonPropertyName("image")]
+		public string Image { get => _image; set => _image = value; }
+
+		[JsonPropertyName("name")]
+		public string Name { get => _name; set => _name = value; }
+	}
 }
