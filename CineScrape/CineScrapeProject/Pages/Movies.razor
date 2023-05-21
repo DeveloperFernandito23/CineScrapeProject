@@ -7,7 +7,7 @@
 <div id="main-page">
 	@foreach (var item in MovieList)
 	{
-		<div class="movie-container">
+		@*<div class="movie-container">
 			<img class="poster" src="@item.PosterURL" />
 			<div class="title-container">
 				<p class="title">@item.Title</p>
@@ -15,6 +15,15 @@
 					<p class="rate-critic">@item.RateCritic</p>
 					<p class="rate-audience">@item.RateAudience</p>
 				</div>
+			</div>
+		</div>*@
+		<div class="card" style="width: 18rem;">
+			<img src="@item.Poster_url" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">@item.Title</h5>
+				<p class="card-text">@item.RateCritic</p>
+				<p class="card-text">@item.RateAudience</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
 			</div>
 		</div>
 	}
