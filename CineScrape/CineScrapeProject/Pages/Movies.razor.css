@@ -1,3 +1,4 @@
-﻿/*#main-page{
-    display: flex;
-}*/
+﻿#movies-list{
+    display: grid;
+
+}
