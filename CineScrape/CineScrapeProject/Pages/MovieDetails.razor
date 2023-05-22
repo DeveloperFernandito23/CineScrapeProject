@@ -74,14 +74,14 @@
 				</tr>
 				<tr>
 					<th></th>
-					<th><InputText @bind-Value="SearchName" /></th>
-					<th><InputText @bind-Value="SearchMessage" /></th>
+					<th><input type="text" @bind="@SearchName" /></th>
+					<th><input type="text" @bind="@SearchMessage" /></th>
 					<th></th>
-					<th></th>
+					<th><input type="number" min="1" max="@MaxPage" @bind="@Page"/></th>
 				</tr>
 			</thead>
 			<tbody id="table-body">
-				@foreach (var item in Reviews)
+				@foreach (var item in Pagination(Reviews))
 				{
 					<tr class="review-row">
 						<td class="review-photo"><img src="@item.UrlImage" /></td>
