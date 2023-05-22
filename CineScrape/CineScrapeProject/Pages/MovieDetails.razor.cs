@@ -7,6 +7,8 @@ namespace CineScrapeProject.Pages
 	public partial class MovieDetails
 	{
 		private const int LIMIT = 10;
+		private enum Months { Jan, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dec }
+		private enum OrderOption { Latest, Oldest}
 
 		private List<Movie> _movies = new();
 		private Movie _movie = new();
@@ -14,7 +16,9 @@ namespace CineScrapeProject.Pages
 		private string _searchName;
 		private string _searchMessage;
 		private List<List<Review>> _paginationReviews = new();
+		private List<DateTime> _dates = new();
 		private int _page = 1;
+		private OrderOption _orderOption = OrderOption.Latest;
 
 		[Parameter]
 		public string MovieId { get; set; }
@@ -26,6 +30,7 @@ namespace CineScrapeProject.Pages
 		public string SearchMessage { get => _searchMessage; set { _searchMessage = value; GetReviews(value, "message"); } }
 
 		public List<List<Review>> PaginationReviews { get => _paginationReviews; set => _paginationReviews = value; }
+		public List<DateTime> Dates { get => _dates; set => _dates = value; }
 		public int Page { get => _page; set => _page = value > 0 && value <= PaginationReviews.Count ? value : 1; }
 		public int MaxPage { get; set; }
 
@@ -60,6 +65,40 @@ namespace CineScrapeProject.Pages
 				}
 			}
 		}
+		private DateTime GetDate(Review review)
+		{
+			string[] newDate = review.Date.Split(' ');
+
+			int month = (int)Enum.Parse(typeof(Months), newDate[0]);
+
+			int year = int.Parse(newDate[2]);
+
+			int day = int.Parse(newDate[1].TrimEnd(','));
+
+			return new DateTime(year, month, day);
+		}
+
+		//private List<Review> OrderDate(List<Review> reviews)
+		//{
+		//	return reviews.Sort((x, y) => GetDate(x).CompareTo(GetDate(y)));
+		//}
+
+		////private void GetDates(Movie movie)
+		////{
+		////	movie.Reviews.ForEach(date =>
+		////	{
+		////		string[] newDate = date.Date.Split(' ');
+
+		////		int month = (int)Enum.Parse(typeof(Months), newDate[0]);
+
+		////		int year = int.Parse(newDate[2]);
+
+		////		int day = int.Parse(newDate[1].TrimEnd(','));
+
+		////		Dates.Add(new DateTime(year, month, day));
+		////	});
+		////}
+
 		private Movie GetMovie(List<Movie> movies, string movieId)
 		{
 			Movie movie = new Movie();
