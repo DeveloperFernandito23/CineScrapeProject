@@ -18,14 +18,16 @@
 					</div>
 				</div>
 			</div>*@
-			<div class="card" style="width: 12rem;">
-				<img src="@item.PosterURL" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">@item.Title</h5>
-					<p class="card-text">@item.RateCritic</p>
-					<p class="card-text">@item.RateAudience</p>
+			<a href="./@item.Title">
+				<div class="card" style="width: 12rem;">
+					<img src="@item.PosterURL" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">@item.Title</h5>
+						<p class="card-text">@item.RateCritic</p>
+						<p class="card-text">@item.RateAudience</p>
+					</div>
 				</div>
-			</div>
+			</a>
 		}
 	</div>
 </div>
