@@ -58,15 +58,15 @@ namespace DataExtractor
 		{
 			int id = 1;
 
-			foreach (string url in _urlList)
-			{
+			//foreach (string url in _urlList)
+			//{
 				Movie movie = new();
 
 				movie.Id = id++;
 
-				string newUrl = $"{MAINURL}{url}";
+				//string newUrl = $"{MAINURL}{url}";
 
-				//string newUrl = "https://www.rottentomatoes.com/m/the_super_mario_bros_movie";
+				string newUrl = "https://www.rottentomatoes.com/m/the_super_mario_bros_movie";
 
 				await page.GotoAsync(newUrl);
 
@@ -89,7 +89,7 @@ namespace DataExtractor
 				await GetTrailerAsync(page, movie);
 
 				_movies.Add(movie);
-			}
+			//}
 
 			string moviesJSON = JsonSerializer.Serialize<List<Movie>>(_movies);
 
@@ -275,13 +275,16 @@ namespace DataExtractor
 				review.FullReview = await fullReview.GetAttributeAsync("href");
 
 				var date = await fullReviewAndDate.QuerySelectorAsync("span");
-				review.Date = await date.InnerHTMLAsync();
+				string dateParsed = await date.InnerHTMLAsync();
+				review.Date = review.GetDate(dateParsed);
 
 				movie.Reviews.Add(review);
 			}
 
 			Console.WriteLine("gg");
 		}
+
+		
 		public static async Task GetTrailerAsync(IPage page, Movie movie)
 		{
 			await page.GotoAsync("https://www.youtube.com/");
@@ -294,7 +297,7 @@ namespace DataExtractor
 			var button = await page.QuerySelectorAsync("button#search-icon-legacy");
 			await button.ClickAsync();
 
-			Thread.Sleep(2000);
+			Thread.Sleep(3000);
 
 			IReadOnlyList<IElementHandle> videos = await page.QuerySelectorAllAsync("#contents.ytd-item-section-renderer ytd-video-renderer");
 
@@ -310,11 +313,11 @@ namespace DataExtractor
 		{
 			ILocator acceptCookies = page.Locator("button[aria-label = 'Aceptar el uso de cookies y otros datos para las finalidades descritas']");
 
-			await acceptCookies.WaitForAsync(new() { Timeout = 3000 });
+			await acceptCookies.WaitForAsync(new() { Timeout = 4000 });
 
 			await acceptCookies.ClickAsync();
 
-			Thread.Sleep(2000);
+			Thread.Sleep(3000);
 		}
 		public static async Task AcceptCookiesRTAsync(IPage page)
 		{

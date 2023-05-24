@@ -9,6 +9,8 @@ namespace DataExtractor
 {
 	public class Review
 	{
+		private enum Months { Jan, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dec }
+
 		private string _urlImage;
 		private string _name;
 		private string _message;
@@ -29,5 +31,20 @@ namespace DataExtractor
 
 		[JsonPropertyName("date")]
 		public string Date { get => _date; set => _date = value; }
+
+		public string GetDate(string date)
+		{
+			string[] newDate = date.Split(' ');
+
+			int month = (int)Enum.Parse(typeof(Months), newDate[0]) + 1;
+
+			int year = int.Parse(newDate[2]);
+
+			int day = int.Parse(newDate[1].TrimEnd(','));
+
+			DateTime dateTime = new DateTime(year, month, day);
+
+			return dateTime.ToString().Split(' ')[0];
+		}
 	}
 }

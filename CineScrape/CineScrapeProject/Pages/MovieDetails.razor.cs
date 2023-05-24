@@ -7,8 +7,7 @@ namespace CineScrapeProject.Pages
 	public partial class MovieDetails
 	{
 		private const int LIMIT = 10;
-		private enum Months { Jan, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dec }
-		private enum OrderOption { Latest, Oldest}
+		private enum Order { Latest, Oldest}
 
 		private List<Movie> _movies = new();
 		private Movie _movie = new();
@@ -16,9 +15,8 @@ namespace CineScrapeProject.Pages
 		private string _searchName;
 		private string _searchMessage;
 		private List<List<Review>> _paginationReviews = new();
-		private List<DateTime> _dates = new();
 		private int _page = 1;
-		private OrderOption _orderOption = OrderOption.Latest;
+		private Order _orderOption = Order.Latest;
 
 		[Parameter]
 		public string MovieId { get; set; }
@@ -30,23 +28,27 @@ namespace CineScrapeProject.Pages
 		public string SearchMessage { get => _searchMessage; set { _searchMessage = value; GetReviews(value, "message"); } }
 
 		public List<List<Review>> PaginationReviews { get => _paginationReviews; set => _paginationReviews = value; }
-		public List<DateTime> Dates { get => _dates; set => _dates = value; }
 		public int Page { get => _page; set => _page = value > 0 && value <= PaginationReviews.Count ? value : 1; }
 		public int MaxPage { get; set; }
+		private Order OrderOption { get => _orderOption; set => _orderOption = value; }
 
 		protected override async Task OnInitializedAsync() => Movies = await Http.GetFromJsonAsync<List<Movie>>("sample-data/movies.json");
 		protected override async Task OnParametersSetAsync()
 		{
-			Movie = GetMovie(Movies, MovieId);
+			Movie = await GetMovie(Movies, MovieId);
 
 			Reviews = Movie.Reviews;
 
-			MakePagination(Reviews);
+			await MakePagination(Reviews);
 
 			MaxPage = PaginationReviews.Count;
+
+			//Movie.Reviews.ForEach((review) => {
+			//	review.NewDate = Review.DateParse(review.Date);
+			//});
 		}
 
-		private void MakePagination(List<Review> allReviews)
+		private async Task MakePagination(List<Review> allReviews)
 		{
 			List<Review> reviews = new List<Review>();
 
@@ -65,17 +67,26 @@ namespace CineScrapeProject.Pages
 				}
 			}
 		}
-		private DateTime GetDate(Review review)
+
+		private	IEnumerable<Review> OrderByDate(List<Review> reviews)
 		{
-			string[] newDate = review.Date.Split(' ');
+			List<Review> paginatedReviews = Pagination(reviews);
 
-			int month = (int)Enum.Parse(typeof(Months), newDate[0]);
+			paginatedReviews.ForEach(review =>
+			{
+				review.NewDate = Review.DateParse(review._date);
+			});
 
-			int year = int.Parse(newDate[2]);
+			var e = paginatedReviews.OrderBy(item => item.NewDate);
 
-			int day = int.Parse(newDate[1].TrimEnd(','));
+			
 
-			return new DateTime(year, month, day);
+			//foreach (Review review in e)
+			//{
+			//	Console.WriteLine(review.NewDate.ToString().Split(' ')[0]);
+			//}
+
+			return e;
 		}
 
 		//private List<Review> OrderDate(List<Review> reviews)
@@ -83,23 +94,7 @@ namespace CineScrapeProject.Pages
 		//	return reviews.Sort((x, y) => GetDate(x).CompareTo(GetDate(y)));
 		//}
 
-		////private void GetDates(Movie movie)
-		////{
-		////	movie.Reviews.ForEach(date =>
-		////	{
-		////		string[] newDate = date.Date.Split(' ');
-
-		////		int month = (int)Enum.Parse(typeof(Months), newDate[0]);
-
-		////		int year = int.Parse(newDate[2]);
-
-		////		int day = int.Parse(newDate[1].TrimEnd(','));
-
-		////		Dates.Add(new DateTime(year, month, day));
-		////	});
-		////}
-
-		private Movie GetMovie(List<Movie> movies, string movieId)
+		private async Task<Movie> GetMovie(List<Movie> movies, string movieId)
 		{
 			Movie movie = new Movie();
 			bool found = false;
