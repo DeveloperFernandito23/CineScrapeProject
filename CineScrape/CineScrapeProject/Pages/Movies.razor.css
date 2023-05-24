@@ -4,3 +4,13 @@
     gap: 2vh 10vw;
     width: 90%;
 }
+.card-body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card-title{
+    text-align: center;
+}
