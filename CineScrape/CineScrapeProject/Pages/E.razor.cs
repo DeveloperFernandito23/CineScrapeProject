@@ -4,10 +4,10 @@ using System.Net.Http.Json;
 
 namespace CineScrapeProject.Pages
 {
-	public partial class MovieDetails
+	public partial class E
 	{
 		private const int LIMIT = 10;
-		private enum Order { Latest, Oldest }
+		private enum Order { Latest, Oldest}
 
 		private List<Movie> _movies = new();
 		private Movie _movie = new();
@@ -77,7 +77,7 @@ namespace CineScrapeProject.Pages
 			}
 		}
 
-		private IEnumerable<Review> OrderByDate(List<Review> reviews)
+		private	IEnumerable<Review> OrderByDate(List<Review> reviews)
 		{
 			List<Review> paginatedReviews = Pagination(reviews);
 

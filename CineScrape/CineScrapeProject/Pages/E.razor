@@ -1,5 +1,5 @@
-﻿@page "/movies/{MovieId}"
-@inject HttpClient Http
+﻿@page "/eee"
+@inject HttpClient Http 
 
 <PageTitle>@Movie.Title | CineScrape</PageTitle>
 
@@ -79,7 +79,7 @@
 					<th><input type="text" @bind="@SearchName" /></th>
 					<th><input type="text" @bind="@SearchMessage" /></th>
 					<th></th>
-					<th><input type="number" min="1" max="@MaxPage" @bind="@Page" /></th>
+					<th><input type="number" min="1" max="@MaxPage" @bind="@Page"/></th>
 				</tr>
 			</thead>
 			<tbody id="table-body">
@@ -97,5 +97,4 @@
 		</table>
 	</div>
 </div>
-
 

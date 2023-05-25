@@ -8,8 +8,7 @@ namespace CineScrapeProject.wwwroot.Models
 		private string _name;
 		private string _message;
 		private string _fullReview;
-		public string _date;
-		private DateTime _newDate;
+		private DateTime _date;
 
 		[JsonPropertyName("url_image")]
 		public string UrlImage { get => _urlImage; set => _urlImage = value; }
@@ -24,9 +23,7 @@ namespace CineScrapeProject.wwwroot.Models
 		public string FullReview { get => _fullReview; set => _fullReview = value; }
 
 		[JsonPropertyName("date")]
-		public string Date { get => _date; set { _date = value; Console.WriteLine(_date); } }
-
-		public DateTime NewDate { get => _newDate; set => _newDate = value; }
+		public DateTime Date { get => _date; set => _date = value; }
 
 		public static DateTime DateParse(string value)
 		{
