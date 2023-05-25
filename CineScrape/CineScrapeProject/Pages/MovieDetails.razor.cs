@@ -47,8 +47,6 @@ namespace CineScrapeProject.Pages
 			await MakePagination(Reviews);
 
 			MaxPage = PaginationReviews.Count;
-
-			CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 		}
 
 		private async Task MakePagination(List<Review> allReviews)
