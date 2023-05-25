@@ -17,3 +17,18 @@
     display: flex;
     justify-content: space-around;
 }
+
+#platforms-description{
+    display: flex;
+    margin-top: 5vh;
+    gap: 0 5vw;
+}
+
+#platforms-container{
+    display: flex;
+}
+
+.platform-image {
+    height: 150px;
+    width: 150px;
+}

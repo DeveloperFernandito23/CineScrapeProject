@@ -28,8 +28,7 @@
 			@foreach (var item in Movie.Platforms)
 			{
 				<div class="platform">
-					<img class="platform-image" src="@item.Image" />
-					<p class="platform-name">@item.Name</p>
+					<img class="platform-image rounded-circle" alt="@item.Name" src="@item.Image" />
 				</div>
 			}
 		</div>
