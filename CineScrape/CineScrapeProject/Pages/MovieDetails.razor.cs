@@ -31,7 +31,7 @@ namespace CineScrapeProject.Pages
 		public List<List<Review>> PaginationReviews { get => _paginationReviews; set => _paginationReviews = value; }
 		public int Page { get => _page; set => _page = value > 0 && value <= PaginationReviews.Count ? value : 1; }
 		public int MaxPage { get; set; }
-		private Order OrderOption { get => _orderOption; set { RestartReviewsAsync(value); _orderOption = value; } }
+		private Order OrderOption { get => _orderOption; set { _orderOption = value; RestartReviews(); SearchName = ""; SearchMessage = ""; } }
 
 
 		protected override async Task OnInitializedAsync() => Movies = await Http.GetFromJsonAsync<List<Movie>>("sample-data/movies.json");
@@ -39,27 +39,33 @@ namespace CineScrapeProject.Pages
 		{
 			Movie = GetMovie(Movies, MovieId);
 
-			RestartReviewsAsync(_orderOption);
+			RestartReviews();
 
 			MaxPage = PaginationReviews.Count;
 		}
 
-		private async Task MakePagination(List<Review> allReviews)
+		private void MakePagination(List<Review> allReviews)
 		{
-			List<Review> reviews = new List<Review>();
+			_paginationReviews.Clear();
+
+			allReviews = OrderByDate(allReviews);
+
+			Reviews = allReviews;
+
+			List<Review> reviewsPaginated = new List<Review>();
 
 			int limitPosition = LIMIT - 1;
 			int totalCount = allReviews.Count;
 
 			for (int i = 0; i < totalCount; i++)
 			{
-				reviews.Add(allReviews[i]);
+				reviewsPaginated.Add(allReviews[i]);
 
 				if (i == limitPosition || i == totalCount - 1)
 				{
-					PaginationReviews.Add(reviews);
+					PaginationReviews.Add(reviewsPaginated);
 					limitPosition += LIMIT;
-					reviews = new();
+					reviewsPaginated = new();
 				}
 			}
 		}
@@ -80,20 +86,17 @@ namespace CineScrapeProject.Pages
 
 			return movie;
 		}
-		private async Task RestartReviewsAsync(Order option)
+		private void RestartReviews()
 		{
 			Reviews = Movie.Reviews;
 
-			Reviews = OrderByDate(Reviews, option);
-
-			await MakePagination(Reviews);
+			MakePagination(Reviews);
 		}
-		private List<Review> OrderByDate(List<Review> reviews, Order option)
+		private List<Review> OrderByDate(List<Review> reviews)
 		{
-			List<Review> orderReviews = reviews.OrderBy(item => item.Date).ToList();
+			List<Review> orderReviews = reviews.OrderByDescending(item => item.Date).ToList();
 
-			if (option == Order.Latest) orderReviews.Reverse();
-			if (option == Order.Oldest) PaginationReviews.Reverse();
+			if (OrderOption == Order.Oldest) orderReviews.Reverse();
 
 			return orderReviews;
 		}
@@ -157,6 +160,6 @@ namespace CineScrapeProject.Pages
 			return $"{month} {day}, {year}";
 		}
 
-		private List<Review> Pagination(List<Review> allReviews) => OrderByDate(allReviews.Count > LIMIT ? PaginationReviews[Page - 1] : allReviews, OrderOption);
+		private List<Review> Pagination(List<Review> allReviews) => OrderByDate(allReviews.Count > LIMIT ? PaginationReviews[Page - 1] : allReviews);
 	}
 }
