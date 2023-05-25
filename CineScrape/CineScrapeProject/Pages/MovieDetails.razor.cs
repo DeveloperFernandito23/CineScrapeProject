@@ -1,6 +1,5 @@
 using CineScrapeProject.wwwroot.Models;
 using Microsoft.AspNetCore.Components;
-using System.Globalization;
 using System.Net.Http.Json;
 
 namespace CineScrapeProject.Pages
@@ -32,7 +31,7 @@ namespace CineScrapeProject.Pages
 		public List<List<Review>> PaginationReviews { get => _paginationReviews; set => _paginationReviews = value; }
 		public int Page { get => _page; set => _page = value > 0 && value <= PaginationReviews.Count ? value : 1; }
 		public int MaxPage { get; set; }
-		private Order OrderOption { get => _orderOption; set => _orderOption = value; }
+		private Order OrderOption { get => _orderOption; set { RestartReviewsAsync(value); _orderOption = value; } }
 
 
 		protected override async Task OnInitializedAsync() => Movies = await Http.GetFromJsonAsync<List<Movie>>("sample-data/movies.json");
@@ -40,11 +39,7 @@ namespace CineScrapeProject.Pages
 		{
 			Movie = GetMovie(Movies, MovieId);
 
-			Reviews = Movie.Reviews;
-
-			Reviews = OrderByDate(Reviews);
-
-			await MakePagination(Reviews);
+			RestartReviewsAsync(_orderOption);
 
 			MaxPage = PaginationReviews.Count;
 		}
@@ -85,11 +80,20 @@ namespace CineScrapeProject.Pages
 
 			return movie;
 		}
-		private List<Review> OrderByDate(List<Review> reviews)
+		private async Task RestartReviewsAsync(Order option)
+		{
+			Reviews = Movie.Reviews;
+
+			Reviews = OrderByDate(Reviews, option);
+
+			await MakePagination(Reviews);
+		}
+		private List<Review> OrderByDate(List<Review> reviews, Order option)
 		{
 			List<Review> orderReviews = reviews.OrderBy(item => item.Date).ToList();
 
-			if(OrderOption == Order.Oldest) orderReviews.Reverse();
+			if (option == Order.Latest) orderReviews.Reverse();
+			if (option == Order.Oldest) PaginationReviews.Reverse();
 
 			return orderReviews;
 		}
@@ -144,7 +148,7 @@ namespace CineScrapeProject.Pages
 		{
 			string[] dateString = date.ToString().Split(' ')[0].Split('/');
 
-			Months month = (Months)int.Parse(dateString[1]);
+			Months month = (Months)(int.Parse(dateString[1]) - 1);
 
 			int day = int.Parse(dateString[0]);
 
@@ -153,6 +157,6 @@ namespace CineScrapeProject.Pages
 			return $"{month} {day}, {year}";
 		}
 
-		private List<Review> Pagination(List<Review> allReviews) => allReviews.Count > LIMIT ? OrderByDate(PaginationReviews[Page - 1]) : OrderByDate(allReviews);
+		private List<Review> Pagination(List<Review> allReviews) => OrderByDate(allReviews.Count > LIMIT ? PaginationReviews[Page - 1] : allReviews, OrderOption);
 	}
 }
