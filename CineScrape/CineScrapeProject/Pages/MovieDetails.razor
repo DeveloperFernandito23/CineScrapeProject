@@ -67,6 +67,9 @@
 		}
 	</div>
 	<div id="reviews">
+
+		<input type="number" min="1" max="@MaxPage" @bind="@Page" />
+
 		<table id="table">
 			<thead id="table-head">
 				<tr>
@@ -81,18 +84,25 @@
 					<th><input type="text" @bind="@SearchName" /></th>
 					<th><input type="text" @bind="@SearchMessage" /></th>
 					<th></th>
-					<th><input type="number" min="1" max="@MaxPage" @bind="@Page" /></th>
+					<th>
+						<div>
+							<select @bind="@OrderOption">
+								<option value="@Order.Latest">Lastest</option>
+								<option value="@Order.Oldest">Oldest</option>
+							</select>
+						</div>
+					</th>
 				</tr>
 			</thead>
 			<tbody id="table-body">
-				@foreach (var item in OrderByDate(Reviews))
+				@foreach (var item in Pagination(Reviews))
 				{
 					<tr class="review-row">
 						<td class="review-photo"><img src="@item.UrlImage" /></td>
 						<td class="review-name">@item.Name</td>
 						<td class="review-message">@item.Message</td>
 						<td class="review-fullreview"><a href="@item.FullReview">Full Review</a></td>
-						<td class="review-date">@item.Date.ToString().Split(' ')[0]</td>
+						<td class="review-date">@PrintDate(item.Date)</td>
 					</tr>
 				}
 			</tbody>
