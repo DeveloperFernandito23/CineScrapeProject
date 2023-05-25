@@ -272,8 +272,7 @@ namespace DataExtractor
 				var fullReviewAndDate = await reviewData.QuerySelectorAsync(".original-score-and-url");
 
 				var fullReview = await fullReviewAndDate.QuerySelectorAsync("a");
-				var fullReviewData = await fullReview?.GetAttributeAsync("href");
-				review.FullReview = fullReviewData ?? "https://developerfernandito23.github.io/Pokedex/";
+				review.FullReview = fullReview != null ? await fullReview?.GetAttributeAsync("href") : "https://developerfernandito23.github.io/Pokedex/";
 
 				var date = await fullReviewAndDate.QuerySelectorAsync("span");
 				string dateParsed = await date.InnerHTMLAsync();
@@ -285,7 +284,7 @@ namespace DataExtractor
 			Console.WriteLine("gg");
 		}
 
-		
+
 		public static async Task GetTrailerAsync(IPage page, Movie movie)
 		{
 			await page.GotoAsync("https://www.youtube.com/");
