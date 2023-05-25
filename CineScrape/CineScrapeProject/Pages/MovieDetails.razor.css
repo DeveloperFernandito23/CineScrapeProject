@@ -9,4 +9,11 @@
 
 #movie-title{
     text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#rate-container {
+    display: flex;
+    justify-content: space-around;
 }
