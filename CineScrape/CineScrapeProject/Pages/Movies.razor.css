@@ -17,8 +17,9 @@
     box-shadow: 0 0 20px black;
 }
 
-.card-title{
+.card-title {
     text-align: center;
+    flex-basis: 100%;
 }
 
 a{
