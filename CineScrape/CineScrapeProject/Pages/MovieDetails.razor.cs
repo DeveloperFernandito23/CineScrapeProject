@@ -1,5 +1,6 @@
 using CineScrapeProject.wwwroot.Models;
 using Microsoft.AspNetCore.Components;
+using System.Globalization;
 using System.Net.Http.Json;
 
 namespace CineScrapeProject.Pages
@@ -7,6 +8,7 @@ namespace CineScrapeProject.Pages
 	public partial class MovieDetails
 	{
 		private const int LIMIT = 10;
+		private enum Months { Jan, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dec }
 		private enum Order { Latest, Oldest }
 
 		private List<Movie> _movies = new();
@@ -33,28 +35,20 @@ namespace CineScrapeProject.Pages
 		private Order OrderOption { get => _orderOption; set => _orderOption = value; }
 
 
-		protected override async Task OnInitializedAsync()
-		{
-			Movies = await Http.GetFromJsonAsync<List<Movie>>("sample-data/movies.json");
-
-			await base.OnInitializedAsync();
-		}
-
+		protected override async Task OnInitializedAsync() => Movies = await Http.GetFromJsonAsync<List<Movie>>("sample-data/movies.json");
 		protected override async Task OnParametersSetAsync()
 		{
-			await base.OnParametersSetAsync();
-
-			Movie = await GetMovie(Movies, MovieId);
+			Movie = GetMovie(Movies, MovieId);
 
 			Reviews = Movie.Reviews;
+
+			Reviews = OrderByDate(Reviews);
 
 			await MakePagination(Reviews);
 
 			MaxPage = PaginationReviews.Count;
 
-			Movie.Reviews.ForEach((review) => {
-				//review.NewDate = Review.DateParse(review.Date);
-			});
+			CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 		}
 
 		private async Task MakePagination(List<Review> allReviews)
@@ -77,21 +71,7 @@ namespace CineScrapeProject.Pages
 			}
 		}
 
-		private IEnumerable<Review> OrderByDate(List<Review> reviews)
-		{
-			List<Review> paginatedReviews = Pagination(reviews);
-
-			var e = paginatedReviews.OrderBy(item => item.Date);
-
-			foreach (Review review in e)
-			{
-				Console.WriteLine(review.Date);
-			}
-
-			return e;
-		}
-
-		private async Task<Movie> GetMovie(List<Movie> movies, string movieId)
+		private Movie GetMovie(List<Movie> movies, string movieId)
 		{
 			Movie movie = new Movie();
 			bool found = false;
@@ -106,6 +86,14 @@ namespace CineScrapeProject.Pages
 			}
 
 			return movie;
+		}
+		private List<Review> OrderByDate(List<Review> reviews)
+		{
+			List<Review> orderReviews = reviews.OrderBy(item => item.Date).ToList();
+
+			if(OrderOption == Order.Oldest) orderReviews.Reverse();
+
+			return orderReviews;
 		}
 		private List<Review> CheckOption(string value, string option)
 		{
@@ -154,6 +142,19 @@ namespace CineScrapeProject.Pages
 			}
 		}
 
-		private List<Review> Pagination(List<Review> allReviews) => allReviews.Count > LIMIT ? PaginationReviews[Page - 1] : allReviews;
+		private string PrintDate(DateTime date)
+		{
+			string[] dateString = date.ToString().Split(' ')[0].Split('/');
+
+			Months month = (Months)int.Parse(dateString[1]);
+
+			int day = int.Parse(dateString[0]);
+
+			int year = int.Parse(dateString[2]);
+
+			return $"{month} {day}, {year}";
+		}
+
+		private List<Review> Pagination(List<Review> allReviews) => allReviews.Count > LIMIT ? OrderByDate(PaginationReviews[Page - 1]) : OrderByDate(allReviews);
 	}
 }

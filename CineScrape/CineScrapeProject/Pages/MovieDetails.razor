@@ -85,14 +85,14 @@
 				</tr>
 			</thead>
 			<tbody id="table-body">
-				@foreach (var item in OrderByDate(Reviews))
+				@foreach (var item in Pagination(Reviews))
 				{
 					<tr class="review-row">
 						<td class="review-photo"><img src="@item.UrlImage" /></td>
 						<td class="review-name">@item.Name</td>
 						<td class="review-message">@item.Message</td>
 						<td class="review-fullreview"><a href="@item.FullReview">Full Review</a></td>
-						<td class="review-date">@item.Date.ToString().Split(' ')[0]</td>
+						<td class="review-date">@PrintDate(item.Date)</td>
 					</tr>
 				}
 			</tbody>

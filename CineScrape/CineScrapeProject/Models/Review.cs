@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace CineScrapeProject.wwwroot.Models
 {
@@ -24,19 +25,5 @@ namespace CineScrapeProject.wwwroot.Models
 
 		[JsonPropertyName("date")]
 		public DateTime Date { get => _date; set => _date = value; }
-
-		public static DateTime DateParse(string value)
-		{
-			//Console.WriteLine(value);
-
-			string[] values = value.Split('/');
-
-			//foreach (string value2 in values)
-			//{
-			//	Console.WriteLine(value2);
-			//}
-
-			return new DateTime(int.Parse(values[2]), int.Parse(values[1]), int.Parse(values[0]));
-		}
 	}
 }
