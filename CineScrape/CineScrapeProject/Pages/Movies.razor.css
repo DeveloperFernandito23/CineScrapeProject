@@ -1,7 +1,7 @@
 ﻿#movies-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 2vh 10vw;
+    gap: 2vh 5vw;
     width: 90%;
 }
 
