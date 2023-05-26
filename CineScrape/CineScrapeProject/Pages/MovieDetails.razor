@@ -56,7 +56,7 @@
 		<div class="carousel-indicators">
 			@foreach (var item in Movie.Photos)
 			{
-				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@index" class="@((_count == 0) ? "active" : "")" aria-current="@(index == 0)" aria-label="Slide @(index + 1)"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@_count" class="@((_count == 0) ? "active" : "")" aria-current="@(_count == 0)" aria-label="Slide @(_count + 1)"></button>
 			}
 		</div>
 		<div class="carousel-inner">
@@ -78,32 +78,6 @@
 			<span class="visually-hidden">Siguiente</span>
 		</button>
 	</div>
-	@*<div id="@CAROUSEL_HTML_ID" class="carousel slide" data-bs-ride="carousel">
-		<div class="carousel-indicators">
-			@foreach (var item in Movie.Photos)
-			{
-				int index = Movie.Photos.IndexOf(item);
-				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@index" class="@((index == 0) ? "active" : "")" aria-current="@(index == 0)" aria-label="Slide @(index + 1)"></button>
-			}
-		</div>
-		<div class="carousel-inner">
-			@foreach (var item in Movie.Photos)
-			{
-				int index = Movie.Photos.IndexOf(item);
-				<div class="carousel-item @((index == 0) ? "active" : "")">
-					<img src="@item" class="d-block w-100" alt="...">
-				</div>
-			}
-		</div>
-		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			<span class="visually-hidden">Previous</span>
-		</button>
-		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			<span class="visually-hidden">Next</span>
-		</button>
-	</div>*@
 	<div id="casts">
 		@foreach (var item in Movie.Casts)
 		{
