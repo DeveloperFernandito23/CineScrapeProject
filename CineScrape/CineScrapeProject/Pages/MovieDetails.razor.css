@@ -60,9 +60,12 @@
 #casts{
     display: flex;
     flex-wrap: wrap;
-    gap: 5vh 5vw;
+    gap: 2vh 2vw;
+    margin: 5vh 5vw;
 }
 
 #title-cast{
     text-align: center;
+    margin-top: 5vh;
+    font-weight: bold;
 }

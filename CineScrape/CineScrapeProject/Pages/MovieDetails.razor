@@ -71,6 +71,9 @@
 
 				_count++;
 			}
+			@{
+				_count = 0;
+			}
 		</div>
 		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -81,14 +84,14 @@
 			<span class="visually-hidden">Siguiente</span>
 		</button>
 	</div>
-	<strong id="title-cast">CAST & CREW</strong>
+	<p id="title-cast">CAST & CREW</p>
 	<br />
 	<div id="casts">
 		@foreach (var item in Movie.Casts)
 		{
 			<figure class="figure">
 				<img src="@item.UrlPhoto" class="figure-img img-fluid rounded" alt="Not found :(">
-				<figcaption class="figure-caption">@item.Name<br /> @item.Character</figcaption>
+				<figcaption class="figure-caption"><strong>@item.Name</strong><br /> @item.Character</figcaption>
 			</figure>
 		}
 	</div>
