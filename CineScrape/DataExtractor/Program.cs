@@ -61,15 +61,15 @@ namespace DataExtractor
 		{
 			int id = 1;
 
-			//foreach (string url in _urlList)
-			//{
+			foreach (string url in _urlList)
+			{
 				Movie movie = new();
 
 				movie.Id = id++;
 
-				//string newUrl = $"{MAINURL}{url}";
+				string newUrl = $"{MAINURL}{url}";
 
-				string newUrl = "https://www.rottentomatoes.com/m/the_super_mario_bros_movie";
+				//string newUrl = "https://www.rottentomatoes.com/m/the_super_mario_bros_movie";
 
 				await page.GotoAsync(newUrl);
 
@@ -92,7 +92,7 @@ namespace DataExtractor
 				await GetTrailerAsync(page, movie);
 
 				_movies.Add(movie);
-			//}
+			}
 
 			string moviesJSON = JsonSerializer.Serialize<List<Movie>>(_movies);
 
