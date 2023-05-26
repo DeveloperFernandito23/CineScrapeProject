@@ -8,6 +8,7 @@ namespace CineScrapeProject.Pages
 	public partial class MovieDetails
 	{
 		private const int LIMIT = 10;
+		private const string CAROUSEL_HTML_ID = "carousel";
 		private enum Months { Jan, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dec }
 		private enum Order { Latest, Oldest }
 
