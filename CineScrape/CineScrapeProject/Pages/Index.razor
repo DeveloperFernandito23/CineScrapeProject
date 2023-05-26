@@ -1,4 +1,20 @@
 ﻿@page "/"
+@inject HttpClient Http
 
 <PageTitle>CineScrape</PageTitle>
 
+<div id="main-page">
+	<div id="grafic-container">
+		@foreach (var item in Stadistics)
+		{
+			<div>
+				@item.Key , @item.Value
+			</div>
+		}
+	</div>
+	<select @bind="FilterOption">
+		<option value="@Filters.RateCritics">Critics</option>
+		<option value="@Filters.RateAudience">Audience</option>
+		<option value="@Filters.Platforms">Platforms</option>
+	</select>
+</div>

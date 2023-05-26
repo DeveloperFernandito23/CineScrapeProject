@@ -1,3 +1,4 @@
+using CineScrapeProject.Models;
 using CineScrapeProject.wwwroot.Models;
 using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
@@ -34,7 +35,7 @@ namespace CineScrapeProject.Pages
 		private Order OrderOption { get => _orderOption; set { _orderOption = value; RestartReviews(); SearchName = ""; SearchMessage = ""; } }
 
 
-		protected override async Task OnInitializedAsync() => Movies = await Http.GetFromJsonAsync<List<Movie>>("sample-data/movies.json");
+		protected override async Task OnInitializedAsync() => Movies = await Http.GetFromJsonAsync<List<Movie>>(Utilities.PATH);
 		protected override async Task OnParametersSetAsync()
 		{
 			Movie = GetMovie(Movies, MovieId);

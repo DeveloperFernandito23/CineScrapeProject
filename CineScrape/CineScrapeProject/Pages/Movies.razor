@@ -1,12 +1,16 @@
 ﻿@page "/movies"
 @inject HttpClient Http
+@using CineScrapeProject.Models;
 
 <PageTitle>Movies | CineScrape</PageTitle>
 
 
 <div id="main-page">
+	<div id="search-container">
+		<input type="text" @bind="@SearchValue" placeholder="MovieFinder..."/>
+	</div>
 	<div class="container" id="movies-list">
-		@foreach (var item in MovieList)
+		@foreach (var item in SearchMovie(MovieList))
 		{
 			@*<div class="movie-container">
 				<img class="poster" src="@item.PosterURL" />
@@ -23,8 +27,8 @@
 					<img src="@item.PosterURL" class="card-img-top" alt="...">
 					<div class="card-body">
 						<h5 class="card-title">@item.Title</h5>
-						<p class="card-text">@item.RateCritic</p>
-						<p class="card-text">@item.RateAudience</p>
+						<p class="card-text">@item.RateAudience.NullCritic() </p>
+						<p class="card-text">@item.RateAudience.NullCritic()</p>
 					</div>
 				</div>
 			</a>
