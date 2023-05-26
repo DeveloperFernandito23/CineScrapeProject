@@ -111,9 +111,25 @@ namespace CineScrapeProject.Pages
 
 			times.ForEach(time =>
 			{
-				if (time < RUNTIMEFILTERS[0])
+				if (time <= RUNTIMEFILTERS[0])
 				{
-
+					results[0].Count++;
+				}
+				else if (time <= RUNTIMEFILTERS[1])
+				{
+					results[1].Count++;
+				}
+				else if (time <= RUNTIMEFILTERS[2])
+				{
+					results[2].Count++;
+				}
+				else if (time <= RUNTIMEFILTERS[3])
+				{
+					results[3].Count++;
+				}
+				else
+				{
+					results[4].Count++;
 				}
 			});
 

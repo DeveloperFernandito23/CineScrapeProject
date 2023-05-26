@@ -15,7 +15,7 @@ namespace CineScrapeProject.Models
 
 			foreach (Platform item in source)
 			{
-				string key = Platform.PlatformsNames[item.Name];
+				string key = item.Name;
 
 				if (dictionary.TryGetValue(key, out int value))
 				{

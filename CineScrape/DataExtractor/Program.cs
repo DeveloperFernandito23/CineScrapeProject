@@ -11,8 +11,11 @@ namespace DataExtractor
 		public const string PATH = "../../../../CineScrapeProject/wwwroot/sample-data/movies.json";
 		public const string DEFAULTREVIEWURL = "https://images.fandango.com/cms/assets/5b6ff500-1663-11ec-ae31-05a670d2d590--rtactordefault.png";
 		public const string DEFAULTCASTURL = "https://images.fandango.com/cms/assets/b0cefeb0-b6a8-11ed-81d8-51a487a38835--poster-default-thumbnail.jpg";
+		public const string DEFAULTCASTURL2 = "https://images.fandango.com/cms/assets/5d84d010-59b1-11ea-b175-791e911be53d--rt-poster-defaultgif.gif";
 		public const string DEFAULTREVIEWURLNEW = "https://pbs.twimg.com/profile_images/1249207089987301376/IM529qEB_400x400.jpg";
 		public const string DEFAULTCASTURLNEW = "https://img.redbull.com/images/c_crop,x_1676,y_0,h_1310,w_1048/c_fill,w_860,h_1075/q_auto:low,f_auto/redbullcom/2023/2/22/qpctvo5nspffj1vgy3a1/red-bull-click-cabecera";
+		public const string URLCINEMA = "https://kinepolis.es/";
+		public const string FULLVIEWNEWURL = "https://developerfernandito23.github.io/Pokedex/";
 
 		public static List<string> _urlList = new();
 		public static List<Movie> _movies = new();
@@ -58,15 +61,15 @@ namespace DataExtractor
 		{
 			int id = 1;
 
-			foreach (string url in _urlList)
-			{
+			//foreach (string url in _urlList)
+			//{
 				Movie movie = new();
 
 				movie.Id = id++;
 
-				string newUrl = $"{MAINURL}{url}";
+				//string newUrl = $"{MAINURL}{url}";
 
-				//string newUrl = "https://www.rottentomatoes.com/m/the_super_mario_bros_movie";
+				string newUrl = "https://www.rottentomatoes.com/m/the_super_mario_bros_movie";
 
 				await page.GotoAsync(newUrl);
 
@@ -89,7 +92,7 @@ namespace DataExtractor
 				await GetTrailerAsync(page, movie);
 
 				_movies.Add(movie);
-			}
+			//}
 
 			string moviesJSON = JsonSerializer.Serialize<List<Movie>>(_movies);
 
@@ -141,7 +144,9 @@ namespace DataExtractor
 				var label = await item.QuerySelectorAsync("b");
 				var value = await item.QuerySelectorAsync("span");
 
-				movie.Characteristics.Add(await label.InnerTextAsync(), await value.InnerTextAsync());
+				var labelText = await label.InnerTextAsync();
+
+				movie.Characteristics.Add(labelText.TrimEnd(':'), await value.InnerTextAsync());
 			}
 		}
 		public static async Task GetCastAsync(IPage page, Movie movie)
@@ -216,7 +221,10 @@ namespace DataExtractor
 				{
 					if (i % 2 != 0)
 					{
-						Platform platform = new Platform();
+						Platform platform = new();
+
+						string urlSite = await platformsContainer.EvaluateAsync<string>($"{selector}[{i}].getAttribute('href')");
+						platform.UrlSite = !urlSite.Contains("www.fandango.com") ? urlSite.Split('?')[0] : URLCINEMA;
 
 						var platformContainer = await platformsContainer.EvaluateHandleAsync($"{selector}[{i}].shadowRoot.querySelector('slot[name = \"bubble\"]').assignedNodes()[0].shadowRoot.querySelector('affiliate-icon').shadowRoot.querySelector('img')");
 
@@ -224,7 +232,7 @@ namespace DataExtractor
 						platform.Image = $"{MAINURL}{image}";
 
 						string name = await platformContainer.EvaluateAsync<string>("container => container.getAttribute('alt')");
-						platform.Name = name;
+						platform.Name = Platform.PlatformsNames[name];
 
 						movie.Platforms.Add(platform);
 					}
@@ -272,7 +280,7 @@ namespace DataExtractor
 				var fullReviewAndDate = await reviewData.QuerySelectorAsync(".original-score-and-url");
 
 				var fullReview = await fullReviewAndDate.QuerySelectorAsync("a");
-				review.FullReview = fullReview != null ? await fullReview?.GetAttributeAsync("href") : "https://developerfernandito23.github.io/Pokedex/";
+				review.FullReview = fullReview != null ? await fullReview?.GetAttributeAsync("href") : FULLVIEWNEWURL;
 
 				var date = await fullReviewAndDate.QuerySelectorAsync("span");
 				string dateParsed = await date.InnerHTMLAsync();
@@ -358,6 +366,6 @@ namespace DataExtractor
 		}
 		public static string CheckURL(string url) => url.Split('?')[1].Substring(2, 11);
 		public static string CheckReviewImage(string urlImage) => urlImage == DEFAULTREVIEWURL ? DEFAULTREVIEWURLNEW : urlImage;
-		public static string CheckCastImage(string urlImage) => urlImage == DEFAULTCASTURL ? DEFAULTCASTURLNEW : urlImage;
+		public static string CheckCastImage(string urlImage) => urlImage == DEFAULTCASTURL || urlImage == DEFAULTCASTURL2 ? DEFAULTCASTURLNEW : urlImage;
 	}
 }
