@@ -142,7 +142,7 @@ namespace CineScrapeProject.Pages
 
 			MovieList.ForEach(movie =>
 			{
-				if (movie.Characteristics.TryGetValue("Runtime:", out string value))
+				if (movie.Characteristics.TryGetValue("Runtime", out string value))
 				{
 					string[] values = value.Split(' ');
 
