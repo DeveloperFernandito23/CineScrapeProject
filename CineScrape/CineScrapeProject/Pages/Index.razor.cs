@@ -7,7 +7,7 @@ namespace CineScrapeProject.Pages
 {
 	public partial class Index
 	{
-		private enum Filters { RateCritics, RateAudience, Platforms, Runtime }
+		private enum Filters { RateCritics, RateAudience, Platforms, Runtime, Genders }
 
 		private readonly List<TimeSpan> RUNTIMEFILTERS = new()
 		{
@@ -16,17 +16,25 @@ namespace CineScrapeProject.Pages
 			new(2, 30, 0),
 			new(3, 0, 0)
 		};
-		List<ToastMessage> messages = new List<ToastMessage>();
+
+		List<ToastMessage> messages = new();
+
 		private List<Slot> _stadistics = new();
 		private Filters _filterOption = Filters.RateCritics;
+		private List<Slot> _genders = new();
 
 		public List<Movie> MovieList { get; set; }
 		public List<Slot> Stadistics { get => _stadistics; set => _stadistics = value; }
 		private Filters FilterOption { get => _filterOption; set { _filterOption = value; MakeStadistics(); } }
 
+		public List<Slot> Genders { get => _genders; set => _genders = value; }
+
 		protected override async Task OnInitializedAsync()
 		{
 			MovieList = await Http.GetFromJsonAsync<List<Movie>>(Utilities.PATH);
+
+			Genders = MovieList.GenderFilter();
+
 			ShowMessage(ToastType.Success);
 		}
 		protected override void OnParametersSet() => MakeStadistics();
@@ -38,23 +46,26 @@ namespace CineScrapeProject.Pages
 			switch (FilterOption)
 			{
 				case Filters.RateCritics:
-					results = Rate(FilterOption);
+					results = RateStats(FilterOption);
 					break;
 				case Filters.RateAudience:
-					results = Rate(FilterOption);
+					results = RateStats(FilterOption);
 					break;
 				case Filters.Platforms:
-					results = Platforms();
+					results = PlatformsStats();
 					break;
 				case Filters.Runtime:
-					results = Runtime();
+					results = RuntimeStats();
+					break;
+				case Filters.Genders:
+					results = Genders;
 					break;
 			}
 
 			Stadistics = results;
 		}
 
-		private List<Slot> Rate(Filters filter)
+		private List<Slot> RateStats(Filters filter)
 		{
 			List<Slot> results = new()
 			{
@@ -93,7 +104,7 @@ namespace CineScrapeProject.Pages
 
 			return results;
 		}
-		private List<Slot> Platforms()
+		private List<Slot> PlatformsStats()
 		{
 			List<Platform> platforms = new();
 
@@ -101,7 +112,7 @@ namespace CineScrapeProject.Pages
 
 			return platforms.PlatformFilter();
 		}
-		private List<Slot> Runtime()
+		private List<Slot> RuntimeStats()
 		{
 			List<Slot> results = new()
 			{
@@ -177,14 +188,5 @@ namespace CineScrapeProject.Pages
 			HelpText = $"{DateTime.Now}",
 			Message = $"Hello, world! This is a toast message. DateTime: {DateTime.Now}",
 		};
-	}
-
-	public class Slot
-	{
-		private string _name;
-		private int _count;
-
-		public string Name { get => _name; set => _name = value; }
-		public int Count { get => _count; set => _count = value; }
 	}
 }

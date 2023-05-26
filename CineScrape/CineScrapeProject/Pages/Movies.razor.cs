@@ -10,11 +10,18 @@ namespace CineScrapeProject.Pages
     {
         private List<Movie> _movieList = new();
         private string _searchvalue = "";
+		private List<Slot> _genders = new();
 
 		public List<Movie> MovieList { get => _movieList; set => _movieList = value; }
 		public string SearchValue { get => _searchvalue; set => _searchvalue = value; }
+		public List<Slot> Genders { get => _genders; set => _genders = value; }
 
-		protected override async Task OnInitializedAsync() => MovieList = await Http.GetFromJsonAsync<List<Movie>>(Utilities.PATH);
+        protected override async Task OnInitializedAsync()
+        {
+            MovieList = await Http.GetFromJsonAsync<List<Movie>>(Utilities.PATH);
+
+            Genders = MovieList.GenderFilter();
+        }
 
         private List<Movie> SearchMovie(List<Movie> allMovies)
         {

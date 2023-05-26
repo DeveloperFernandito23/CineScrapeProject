@@ -5,17 +5,19 @@
 <Toasts class="p-3" Messages="messages" AutoHide="true" Delay="6000" Placement="ToastsPlacement.TopRight" />
 <div id="main-page">
 	<div id="grafic-container">
+		<select @bind="FilterOption">
+			<option value="@Filters.RateCritics">Critics</option>
+			<option value="@Filters.RateAudience">Audience</option>
+			<option value="@Filters.Platforms">Platforms</option>
+			<option value="@Filters.Runtime">Runtime</option>
+			<option value="@Filters.Genders">Genders</option>
+		</select>
 		@foreach (var item in Stadistics)
 		{
 			<div>
-				@item.Name , @item.Count
+				@item.Name: @item.Count
 			</div>
 		}
 	</div>
-	<select @bind="FilterOption">
-		<option value="@Filters.RateCritics">Critics</option>
-		<option value="@Filters.RateAudience">Audience</option>
-		<option value="@Filters.Platforms">Platforms</option>
-		<option value="@Filters.Runtime">Runtime</option>
-	</select>
+	
 </div>

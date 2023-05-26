@@ -30,7 +30,7 @@
 			@foreach (var item in Movie.Platforms)
 			{
 				<div class="platform">
-					<img class="platform-image rounded-circle" alt="@item.Name" src="/platfoms-images/@(item.Name).png" />
+					<a href="@item.UrlSite"><img class="platform-image rounded-circle" alt="@item.Name" src="/platfoms-images/@(item.Name).png" /></a>
 					@*DE AQUI NO TOQUES NADA QUE ESTO HACIENDO LAS IMAGENES A MANO PARA QUE SE VEAN 
 						BIEN DE FORMA REDONDA, QUE LAS DE LA PÁGINA TIENE TRUCOS XDD
 					*@
@@ -46,7 +46,7 @@
 			@foreach (var item in Movie.Characteristics)
 			{
 				<li class="list-group-item">
-					<strong>@(item.Key)</strong> @item.Value
+					<strong>@(item.Key):</strong> @item.Value
 				</li>
 			}
 		</ul>
