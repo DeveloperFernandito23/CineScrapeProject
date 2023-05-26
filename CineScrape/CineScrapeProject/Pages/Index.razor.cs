@@ -1,3 +1,4 @@
+using BlazorBootstrap;
 using CineScrapeProject.Models;
 using CineScrapeProject.wwwroot.Models;
 using System.Net.Http.Json;
@@ -15,7 +16,7 @@ namespace CineScrapeProject.Pages
 			new(2, 30, 0),
 			new(3, 0, 0)
 		};
-
+		List<ToastMessage> messages = new List<ToastMessage>();
 		private List<Slot> _stadistics = new();
 		private Filters _filterOption = Filters.RateCritics;
 
@@ -23,7 +24,11 @@ namespace CineScrapeProject.Pages
 		public List<Slot> Stadistics { get => _stadistics; set => _stadistics = value; }
 		private Filters FilterOption { get => _filterOption; set { _filterOption = value; MakeStadistics(); } }
 
-		protected override async Task OnInitializedAsync() => MovieList = await Http.GetFromJsonAsync<List<Movie>>(Utilities.PATH);
+		protected override async Task OnInitializedAsync()
+		{
+			MovieList = await Http.GetFromJsonAsync<List<Movie>>(Utilities.PATH);
+			ShowMessage(ToastType.Success);
+		}
 		protected override void OnParametersSet() => MakeStadistics();
 
 		private void MakeStadistics()
@@ -162,6 +167,16 @@ namespace CineScrapeProject.Pages
 
 			return runtimes;
 		}
+		private void ShowMessage(ToastType toastType) => messages.Add(CreateToastMessage(toastType));
+
+		private ToastMessage CreateToastMessage(ToastType toastType)
+		=> new ToastMessage
+		{
+			Type = toastType,
+			Title = "Blazor Bootstrap",
+			HelpText = $"{DateTime.Now}",
+			Message = $"Hello, world! This is a toast message. DateTime: {DateTime.Now}",
+		};
 	}
 
 	public class Slot
