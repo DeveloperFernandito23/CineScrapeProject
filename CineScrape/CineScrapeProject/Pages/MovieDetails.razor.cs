@@ -19,6 +19,7 @@ namespace CineScrapeProject.Pages
 		private string _searchMessage;
 		private List<List<Review>> _paginationReviews = new();
 		private int _page = 1;
+		private int _count = 0;
 		private Order _orderOption = Order.Latest;
 
 		[Parameter]
