@@ -51,7 +51,7 @@ namespace DataExtractor
 					urlMovie = await newUrl.GetAttributeAsync("href");
 				}
 
-				_urlList.Add(urlMovie);
+				if (!_urlList.Contains(urlMovie)) _urlList.Add(urlMovie);
 			}
 		}
 		public static async Task MovieDetailsAsync(IPage page)
