@@ -56,7 +56,11 @@
 		<div class="carousel-indicators">
 			@foreach (var item in Movie.Photos)
 			{
-				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@_count" class="@((_count == 0) ? "active" : "")" aria-current="@(_count == 0)" aria-label="Slide @(_count + 1)"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="@_count" class="@((_count == 0) ? "active" : "")" aria-current="true" aria-label="Slide @(_count + 1)"></button>
+				_count++;
+			}
+			@{
+				_count = 0;
 			}
 		</div>
 		<div class="carousel-inner">
