@@ -42,12 +42,11 @@
 		</div>
 	</div>
 	<div id="characteristics">
-		<ul id="characteristics-container">
+		<ul class="list-group list-group-flush">
 			@foreach (var item in Movie.Characteristics)
 			{
-				<li class="characteristic">
-					<p class="characteristic-name">@item.Key</p>
-					<p class="characteristic-value">@item.Value</p>
+				<li class="list-group-item">
+					<strong>@(item.Key)</strong> @item.Value
 				</li>
 			}
 		</ul>
@@ -82,14 +81,15 @@
 			<span class="visually-hidden">Siguiente</span>
 		</button>
 	</div>
+	<strong id="title-cast">CAST & CREW</strong>
+	<br />
 	<div id="casts">
 		@foreach (var item in Movie.Casts)
 		{
-			<div class="cast">
-				<img class="cast-photo" src="@item.UrlPhoto" />
-				<p class="cast-name">@item.Name</p>
-				<p class="cast-character">@item.Character</p>
-			</div>
+			<figure class="figure">
+				<img src="@item.UrlPhoto" class="figure-img img-fluid rounded" alt="Not found :(">
+				<figcaption class="figure-caption">@item.Name<br /> @item.Character</figcaption>
+			</figure>
 		}
 	</div>
 	<div id="reviews">

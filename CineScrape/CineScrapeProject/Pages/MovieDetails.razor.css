@@ -34,3 +34,35 @@
     width: 150px;
     border: 1px solid grey;
 }
+
+
+.carousel-item.active {
+    display: block;
+    margin: 0 auto;
+}
+
+.carousel-inner {
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+#carouselExampleIndicators {
+    width: 50%;
+    background-color: rgba(128, 128, 128, .3);
+    margin: auto;
+}
+
+#characteristics{
+    margin: 2vh 10vh;
+}
+
+#casts{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5vh 5vw;
+}
+
+#title-cast{
+    text-align: center;
+}
