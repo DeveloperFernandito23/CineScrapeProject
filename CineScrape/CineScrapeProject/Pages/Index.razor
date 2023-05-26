@@ -8,7 +8,7 @@
 		@foreach (var item in Stadistics)
 		{
 			<div>
-				@item.Key , @item.Value
+				@item.Name , @item.Count
 			</div>
 		}
 	</div>
@@ -16,5 +16,6 @@
 		<option value="@Filters.RateCritics">Critics</option>
 		<option value="@Filters.RateAudience">Audience</option>
 		<option value="@Filters.Platforms">Platforms</option>
+		<option value="@Filters.Runtime">Runtime</option>
 	</select>
 </div>

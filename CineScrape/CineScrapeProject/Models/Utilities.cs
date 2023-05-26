@@ -1,4 +1,5 @@
-﻿using CineScrapeProject.wwwroot.Models;
+﻿using CineScrapeProject.Pages;
+using CineScrapeProject.wwwroot.Models;
 
 namespace CineScrapeProject.Models
 {
@@ -8,25 +9,30 @@ namespace CineScrapeProject.Models
 
 		public static string NullCritic(this int? num) => num.HasValue ? num.Value.ToString() : "--";
 
-		public static Dictionary<string, int> Mode(this IEnumerable<Platform> source)
+		public static List<Slot> PlatformFilter(this IEnumerable<Platform> source)
 		{
-			Dictionary<string, int> result = new();
+			Dictionary<string, int> dictionary = new();
 
 			foreach (Platform item in source)
 			{
 				string key = Platform.PlatformsNames[item.Name];
 
-				if (result.TryGetValue(key, out int value))
+				if (dictionary.TryGetValue(key, out int value))
 				{
-					result[key] = value + 1;
+					dictionary[key] = value + 1;
 				}
 				else
 				{
-					result.Add(key, 1);
+					dictionary.Add(key, 1);
 				}
 			}
 
-			return result;
+			List<Slot> results = new();
+
+			foreach (var item in dictionary)
+				results.Add(new() { Name = item.Key, Count = item.Value});
+
+			return results;
 		}
 	}
 }

@@ -6,13 +6,21 @@ namespace CineScrapeProject.Pages
 {
 	public partial class Index
 	{
-		private enum Filters { RateCritics, RateAudience, Platforms }
+		private enum Filters { RateCritics, RateAudience, Platforms, Runtime }
 
-		private Dictionary<string, int> _stadistics = new();
+		private readonly List<TimeSpan> RUNTIMEFILTERS = new()
+		{
+			new(1, 30, 0),
+			new(2, 0, 0),
+			new(2, 30, 0),
+			new(3, 0, 0)
+		};
+
+		private List<Slot> _stadistics = new();
 		private Filters _filterOption = Filters.RateCritics;
 
 		public List<Movie> MovieList { get; set; }
-		public Dictionary<string, int> Stadistics { get => _stadistics; set => _stadistics = value; }
+		public List<Slot> Stadistics { get => _stadistics; set => _stadistics = value; }
 		private Filters FilterOption { get => _filterOption; set { _filterOption = value; MakeStadistics(); } }
 
 		protected override async Task OnInitializedAsync() => MovieList = await Http.GetFromJsonAsync<List<Movie>>(Utilities.PATH);
@@ -20,7 +28,7 @@ namespace CineScrapeProject.Pages
 
 		private void MakeStadistics()
 		{
-			Dictionary<string, int> results = new();
+			List<Slot> results = new();
 
 			switch (FilterOption)
 			{
@@ -33,19 +41,22 @@ namespace CineScrapeProject.Pages
 				case Filters.Platforms:
 					results = Platforms();
 					break;
+				case Filters.Runtime:
+					results = Runtime();
+					break;
 			}
 
 			Stadistics = results;
 		}
 
-		private Dictionary<string, int> Rate(Filters filter)
+		private List<Slot> Rate(Filters filter)
 		{
-			Dictionary<string, int> results = new()
+			List<Slot> results = new()
 			{
-				{ "No rate or less than or equal 25", 0 },
-				{ "Rate 26 - 50", 0 },
-				{ "Rate 51 - 75", 0 },
-				{ "Rate 76 - 100", 0 },
+				new() { Name = "No rate or less than or equal 25%"},
+				new() { Name = "Rate 26% - 50%"},
+				new() { Name = "Rate 51% - 75%"},
+				new() { Name = "Rate 76% - 100%"},
 			};
 
 			MovieList.ForEach(movie =>
@@ -54,7 +65,7 @@ namespace CineScrapeProject.Pages
 
 				if (!property.HasValue || property.Value <= 25)
 				{
-					results["No rate or less than or equal 25"]++;
+					results[0].Count++;
 				}
 				else
 				{
@@ -62,32 +73,87 @@ namespace CineScrapeProject.Pages
 
 					if (value <= 50)
 					{
-						results["Rate 26 - 50"]++;
+						results[1].Count++;
 					}
 					else if (value <= 75)
 					{
-						results["Rate 51 - 75"]++;
+						results[2].Count++;
 					}
 					else
 					{
-						results["Rate 76 - 100"]++;
+						results[3].Count++;
 					}
 				}
 			});
 
 			return results;
 		}
-		private Dictionary<string, int> Platforms()
+		private List<Slot> Platforms()
 		{
-			Dictionary<string, int> results = new();
-
 			List<Platform> platforms = new();
 
 			MovieList.ForEach(movie => movie.Platforms.ForEach(platform => platforms.Add(platform)));
 
-			results = platforms.Mode();
+			return platforms.PlatformFilter();
+		}
+		private List<Slot> Runtime()
+		{
+			List<Slot> results = new()
+			{
+				new() { Name =  "Runtime less than or equal 1h 30m"},
+				new() { Name =  "Runtime 1h 30m - 2h" },
+				new() { Name =  "Runtime 2h - 2h 30m" },
+				new() { Name =  "Runtime 2h 30m - 3h" },
+				new() { Name =  "Runtime greater than 3h" }
+			};
+
+			List<TimeSpan> times = GetRuntimes();
+
+			times.ForEach(time =>
+			{
+				if (time < RUNTIMEFILTERS[0])
+				{
+
+				}
+			});
 
 			return results;
 		}
+
+		private List<TimeSpan> GetRuntimes()
+		{
+			List<TimeSpan> runtimes = new();
+
+			MovieList.ForEach(movie =>
+			{
+				if (movie.Characteristics.TryGetValue("Runtime:", out string value))
+				{
+					string[] values = value.Split(' ');
+
+					int hours = 0, minutes = 0;
+
+					for (int i = 0; i < values.Length; i++)
+					{
+						if (values[i].Contains('h')) hours = int.Parse(values[i].TrimEnd('h'));
+						if (values[i].Contains('m')) minutes = int.Parse(values[i].TrimEnd('m'));
+					}
+
+					TimeSpan timeSpan = new TimeSpan(hours, minutes, 0);
+
+					runtimes.Add(timeSpan);
+				}
+			});
+
+			return runtimes;
+		}
+	}
+
+	public class Slot
+	{
+		private string _name;
+		private int _count;
+
+		public string Name { get => _name; set => _name = value; }
+		public int Count { get => _count; set => _count = value; }
 	}
 }
