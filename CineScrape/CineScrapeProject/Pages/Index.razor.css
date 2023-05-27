@@ -16,3 +16,15 @@
     margin: auto;
     margin-bottom: 10vh;
 }
+
+#separation{
+    margin-right: 10px;
+}
+
+ul a{
+    text-decoration: none;
+}
+
+#exp {
+    margin-left: 10vw;
+}
