@@ -12,8 +12,8 @@ namespace DataExtractor
 		public const string DEFAULTREVIEWURL = "https://images.fandango.com/cms/assets/5b6ff500-1663-11ec-ae31-05a670d2d590--rtactordefault.png";
 		public const string DEFAULTCASTURL = "https://images.fandango.com/cms/assets/b0cefeb0-b6a8-11ed-81d8-51a487a38835--poster-default-thumbnail.jpg";
 		public const string DEFAULTCASTURL2 = "https://images.fandango.com/cms/assets/5d84d010-59b1-11ea-b175-791e911be53d--rt-poster-defaultgif.gif";
-		public const string DEFAULTREVIEWURLNEW = "https://pbs.twimg.com/profile_images/1249207089987301376/IM529qEB_400x400.jpg";
-		public const string DEFAULTCASTURLNEW = "https://img.redbull.com/images/c_crop,x_1676,y_0,h_1310,w_1048/c_fill,w_860,h_1075/q_auto:low,f_auto/redbullcom/2023/2/22/qpctvo5nspffj1vgy3a1/red-bull-click-cabecera";
+		public const string DEFAULTREVIEWURLNEW = "https://media.tenor.com/9RCIDZjkhBsAAAAC/hamster-meme.gif";
+		public const string DEFAULTCASTURLNEW = "image-not-found.png";
 		public const string URLCINEMA = "https://kinepolis.es/";
 		public const string FULLVIEWNEWURL = "https://developerfernandito23.github.io/Pokedex/";
 
