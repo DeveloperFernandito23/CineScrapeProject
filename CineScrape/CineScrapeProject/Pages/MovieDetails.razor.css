@@ -50,8 +50,10 @@
 
 #carouselExampleIndicators {
     width: 50%;
-    background-color: rgba(128, 128, 128, .3);
+    background-color: rgb(191 5 5 / 75%);
     margin: auto;
+    border: 2px solid black;
+    border-radius: 20px;
 }
 
 #characteristics{
@@ -131,4 +133,29 @@ tr:hover{
     height: 1.1em;
     border-left: 3px solid #fa320a;
     margin: -1px 0 0 -9px;
+}
+
+#grey-container{
+    width: 60%;
+    height: 200px;
+    background-color: rgba(128, 128, 128, 0.3);
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#grey-container-poster {
+    width: 10%;
+    height: 150px;
+    background-color: rgba(128, 128, 128, 0.3);
+}
+
+#skeleton-images{
+    display: flex;
+    justify-content: space-between;
+}
+
+#skeleton{
+    margin-top: 20vh;
 }

@@ -20,6 +20,7 @@ namespace CineScrapeProject.Pages
 		private int _page = 1;
 		private int _limit = 10;
 		private int _count = 0;
+		private bool _skeleton = true;
 		private Order _orderOption = Order.Latest;
 
 		[Parameter]
@@ -48,6 +49,11 @@ namespace CineScrapeProject.Pages
 			MaxPage = PaginationReviews.Count;
 		}
 
+		protected override void OnAfterRender(bool firstRender)
+		{
+			Thread.Sleep(1500);
+			_skeleton = false;
+		}
 		private void MakePagination(List<Review> allReviews)
 		{
 			_paginationReviews.Clear();
