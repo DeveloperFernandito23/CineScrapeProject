@@ -120,7 +120,7 @@
 					<th>Publish Date</th>
 				</tr>
 				<tr>
-					<th></th>
+					<th><img class="w-100" src="./image-not-found.png"/></th>
 					<th><input type="text" @bind="@SearchName" placeholder="Search Name..."/></th>
 					<th><input type="text" @bind="@SearchMessage" placeholder="Search Message..." /></th>
 					<th></th>
@@ -141,7 +141,7 @@
 						<td class="review-photo"><img src="@item.UrlImage" /></td>
 						<td class="review-name">@item.Name</td>
 						<td class="review-message">@item.Message</td>
-						<td class="review-fullreview"><a href="@item.FullReview">Full Review</a></td>
+						<td class="review-fullreview"><a class="link-primary" href="@item.FullReview">Full Review</a></td>
 						<td class="review-date">@item.Date.PrintDate()</td>
 					</tr>
 				}
