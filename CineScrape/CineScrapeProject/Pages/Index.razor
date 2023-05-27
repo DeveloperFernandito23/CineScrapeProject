@@ -1,7 +1,6 @@
 ﻿@page "/"
 @inject HttpClient Http
 
-<Chart Config="_config"></Chart>
 
 <PageTitle>CineScrape</PageTitle>
 <Toasts class="p-3" Messages="messages" AutoHide="true" Delay="6000" Placement="ToastsPlacement.TopRight" />
@@ -22,3 +21,13 @@
 		}
 	</div>
 </div>
+
+@if (prueba)
+{
+	<Chart Config="DoughConfig"></Chart>
+}
+else
+{
+	<Chart Config="_pieConfig"></Chart>
+
+}

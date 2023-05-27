@@ -23,17 +23,22 @@ namespace CineScrapeProject.Pages
 
 		List<ToastMessage> messages = new();
 
-		private PieConfig _config = new ();
+		private PieConfig _pieConfig = new();
+		private PieConfig _doughConfig = new();
+		private PolarAreaConfig _polarConfig = new();
 		private List<Slot> _stadistics = new();
 		private Filters _filterOption = Filters.RateCritics;
 		private List<Slot> _genders = new();
+		private bool prueba = false;
 
 		public List<Movie> MovieList { get; set; }
 		public List<Slot> Stadistics { get => _stadistics; set => _stadistics = value; }
 		private Filters FilterOption { get => _filterOption; set { _filterOption = value; MakeStadistics(); } }
 
 		public List<Slot> Genders { get => _genders; set => _genders = value; }
-		public PieConfig Config { get => _config; set => _config = value; }
+		public PieConfig PieConfig { get => _pieConfig; set => _pieConfig = value; }
+		public PieConfig DoughConfig { get => _doughConfig; set => _doughConfig = value; }
+		public PolarAreaConfig PolarConfig { get => _polarConfig; set => _polarConfig = value; }
 
 		protected override async Task OnInitializedAsync()
 		{
@@ -48,11 +53,25 @@ namespace CineScrapeProject.Pages
 
 		private async Task CreateCharts()
 		{
-			Config = new PieConfig
+			PieConfig = new PieConfig
 			{
 				Options = new PieOptions
 				{
 					Responsive = true,
+					Title = new OptionsTitle
+					{
+						Display = false,
+						Text = "ChartJs.Blazor Pie Chart"
+					}
+				}
+			};
+
+			DoughConfig = new PieConfig
+			{
+				Options = new PieOptions
+				{
+					Responsive = true,
+					CutoutPercentage = 50,
 					Title = new OptionsTitle
 					{
 						Display = true,
@@ -66,32 +85,27 @@ namespace CineScrapeProject.Pages
 			await MakeStadistics();
 		}
 
-		private async Task FillChart()
+		private async Task FillCharts(Filters filterSelected)
 		{
-			Config.Data.Labels.Clear();
-			Config.Data.Datasets.Clear();
 
-			foreach (Slot slot in Stadistics)
+			switch (FilterOption)
 			{
-				Config.Data.Labels.Add(slot.Name);
+				case Filters.Platforms:
+					prueba = true;
+					FillDoughChart();
+					break;
+				case Filters.Runtime:
+
+					break;
+				case Filters.Genders:
+
+					break;
+				default:
+					FillPieChart();
+					break;
 			}
 
-			PieDataset<int> dataset = new PieDataset<int>()
-			{
 
-				BackgroundColor = new[]
-				{
-					ColorUtil.ColorHexString(255, 99, 132), // Slice 1 aka "Red"
-					ColorUtil.ColorHexString(255, 205, 86), // Slice 2 aka "Yellow"
-					ColorUtil.ColorHexString(75, 192, 192), // Slice 3 aka "Green"
-					ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
-				}
-			};
-			foreach (Slot slot in Stadistics)
-			{
-				dataset.Add(slot.Count);
-			}
-			Config.Data.Datasets.Add(dataset);
 		}
 
 
@@ -125,7 +139,7 @@ namespace CineScrapeProject.Pages
 			Stadistics = results;
 
 
-			await FillChart();
+			await FillCharts(FilterOption);
 		}
 
 		private List<Slot> RateStats(Filters filter)
@@ -251,5 +265,70 @@ namespace CineScrapeProject.Pages
 			HelpText = $"{DateTime.Now}",
 			Message = $"Hello, world! This is a toast message. DateTime: {DateTime.Now}",
 		};
+
+		private void FillPieChart()
+		{
+			PieConfig.Data.Labels.Clear();
+			PieConfig.Data.Datasets.Clear();
+
+			foreach (Slot slot in Stadistics)
+			{
+				PieConfig.Data.Labels.Add(slot.Name);
+			}
+
+			PieDataset<int> dataset = new PieDataset<int>()
+			{
+
+				BackgroundColor = new[]
+				{
+							ColorUtil.ColorHexString(255, 99, 132), // Slice 1 aka "Red"
+							ColorUtil.ColorHexString(255, 205, 86), // Slice 2 aka "Yellow"
+							ColorUtil.ColorHexString(75, 192, 192), // Slice 3 aka "Green"
+							ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
+						}
+			};
+			foreach (Slot slot in Stadistics)
+			{
+				dataset.Add(slot.Count);
+			}
+			PieConfig.Data.Datasets.Add(dataset);
+		}
+
+		private void FillDoughChart()
+		{
+			DoughConfig.Data.Labels.Clear();
+			DoughConfig.Data.Datasets.Clear();
+
+			foreach (Slot slot in Stadistics)
+			{
+				DoughConfig.Data.Labels.Add(slot.Name);
+			}
+
+			PieDataset<int> dataset = new PieDataset<int>()
+			{
+
+				BackgroundColor = new[]
+				{
+							ColorUtil.ColorHexString(255, 99, 132), // Slice 1 aka "Red"
+							ColorUtil.ColorHexString(255, 205, 86), // Slice 2 aka "Yellow"
+							ColorUtil.ColorHexString(75, 192, 192), // Slice 3 aka "Green"
+							ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString()
+				}
+			};
+			foreach (Slot slot in Stadistics)
+			{
+				dataset.Add(slot.Count);
+			}
+			DoughConfig.Data.Datasets.Add(dataset);
+		}
 	}
 }
