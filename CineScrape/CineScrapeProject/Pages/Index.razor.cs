@@ -10,6 +10,7 @@ using CineScrapeProject.wwwroot.Models;
 using System.Drawing;
 using System.Net.Http.Json;
 using System.Reflection.Emit;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CineScrapeProject.Pages
 {
@@ -38,7 +39,7 @@ namespace CineScrapeProject.Pages
 
 		public List<Movie> MovieList { get; set; }
 		public List<Slot> Stadistics { get => _stadistics; set => _stadistics = value; }
-		private Filters FilterOption { get => _filterOption; set { _filterOption = value; MakeStadistics(); } }
+		private Filters FilterOption { get => _filterOption; set { _filterOption = value; MakeStadisticsAsync(); } }
 
 		public List<Slot> Genders { get => _genders; set => _genders = value; }
 		public PieConfig PieConfig { get => _pieConfig; set => _pieConfig = value; }
@@ -56,9 +57,23 @@ namespace CineScrapeProject.Pages
 
 			ColorUtil.RandomColorString();
 		}
+		protected override void OnInitialized()
+		{
+			CreateChartsAsync();
 
+			for (int i = 0; i < 30; i++)
+			{
+				string color = ColorUtil.RandomColorString();
+				_colorsList.Add(color);
+			}
+		}
 
-		private async Task CreateCharts()
+		protected override async Task OnParametersSetAsync()
+		{
+			await MakeStadisticsAsync();
+		}
+
+		private async Task CreateChartsAsync()
 		{
 			PieConfig = new PieConfig
 			{
@@ -67,8 +82,8 @@ namespace CineScrapeProject.Pages
 					Responsive = true,
 					Title = new OptionsTitle
 					{
-						Display = false,
-						Text = "ChartJs.Blazor Pie Chart"
+						Display = true,
+						Text = "All Movies Rate"
 					}
 				}
 			};
@@ -82,7 +97,7 @@ namespace CineScrapeProject.Pages
 					Title = new OptionsTitle
 					{
 						Display = true,
-						Text = "ChartJs.Blazor Pie Chart"
+						Text = "All Movies Platforms"
 					}
 				}
 			};
@@ -95,7 +110,7 @@ namespace CineScrapeProject.Pages
 					Title = new OptionsTitle
 					{
 						Display = true,
-						Text = "ChartJs.Blazor Pie Chart"
+						Text = "All Movies Runtime"
 					},
 					Legend = new Legend
 					{
@@ -113,17 +128,13 @@ namespace CineScrapeProject.Pages
 					Title = new OptionsTitle
 					{
 						Display = true,
-						Text = "alksjals"
+						Text = "All Movies Genders"
 					}
 				}
 			};
 		}
-		protected override async Task OnParametersSetAsync()
-		{
-			await MakeStadistics();
-		}
 
-		private async Task FillCharts(Filters filterSelected)
+		private async Task FillChartsAsync(Filters filterSelected)
 		{
 
 			switch (FilterOption)
@@ -145,18 +156,7 @@ namespace CineScrapeProject.Pages
 
 		}
 
-		
-		protected override void OnInitialized()
-		{
-			CreateCharts();
-
-			for (int i = 0; i < 30; i++)
-			{
-				string color = ColorUtil.RandomColorString();
-				_colorsList.Add(color);
-			}
-		}
-		private async Task MakeStadistics()
+		private async Task MakeStadisticsAsync()
 		{
 			List<Slot> results = new();
 
@@ -182,7 +182,7 @@ namespace CineScrapeProject.Pages
 			Stadistics = results;
 
 
-			await FillCharts(FilterOption);
+			await FillChartsAsync(FilterOption);
 		}
 
 		private List<Slot> RateStats(Filters filter)
@@ -305,7 +305,7 @@ namespace CineScrapeProject.Pages
 			Type = toastType,
 			Title = "CINESCRAPE",
 			HelpText = $"{DateTime.Now}",
-			Message = $"Hello, world! This is a toast message. DateTime: {DateTime.Now}",
+			Message = $"Welcome to CineScrape.\r\nLet's hope you enjoy!!!",
 		};
 
 		private void FillPieChart()
