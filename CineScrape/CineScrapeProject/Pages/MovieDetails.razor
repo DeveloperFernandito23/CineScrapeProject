@@ -121,12 +121,12 @@
 				</tr>
 				<tr>
 					<th><img class="w-100" src="./image-not-found.png"/></th>
-					<th><input type="text" @bind="@SearchName" placeholder="Search Name..."/></th>
-					<th><input type="text" @bind="@SearchMessage" placeholder="Search Message..." /></th>
+					<th><input type="text" class="form-control" @bind="@SearchName" placeholder="Search Name..."/></th>
+					<th><input type="text" class="form-control" @bind="@SearchMessage" placeholder="Search Message..." /></th>
 					<th></th>
 					<th>
 						<div>
-							<select @bind="@OrderOption">
+							<select class="form-select w-auto" @bind="@OrderOption">
 								<option value="@Order.Latest">Lastest</option>
 								<option value="@Order.Oldest">Oldest</option>
 							</select>
