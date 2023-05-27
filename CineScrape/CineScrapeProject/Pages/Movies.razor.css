@@ -43,3 +43,11 @@ header {
 .form-control {
     width: 40vw;
 }
+
+#img-card{
+    width: 40px;
+}
+.critic-container{
+    display: flex;
+    align-items: center;
+}
