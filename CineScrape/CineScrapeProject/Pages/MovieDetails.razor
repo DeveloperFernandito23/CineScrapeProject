@@ -5,7 +5,12 @@
 
 <PageTitle>@Movie.Title | CineScrape</PageTitle>
 
-
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="/movies">Movies</a></li>
+		<li class="breadcrumb-item active" aria-current="page">@MovieId</li>
+	</ol>
+</nav>
 
 <div class="card @((_skeleton) ? "d-block" : "d-none")" aria-hidden="true" id="skeleton">
 	<div class="card-body">
@@ -62,7 +67,7 @@
 				</div>
 			</div>
 			<div id="trailer-container">
-				<iframe id="trailer" src="@Movie.Trailer" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+				<iframe id="trailer" class="video" src="@Movie.Trailer" width="560" height="360" frameborder="0" allowfullscreen></iframe>
 			</div>
 		</div>
 	</div>

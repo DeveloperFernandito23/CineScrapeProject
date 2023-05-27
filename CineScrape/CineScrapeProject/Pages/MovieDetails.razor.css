@@ -93,8 +93,8 @@ td.review-photo > img{
 }
 
 #trailer-container {
-    display: flex;
-    justify-content: center;
+   display: flex;
+   justify-content: center;
 }
 
 #table {
@@ -158,4 +158,16 @@ tr:hover{
 
 #skeleton{
     margin-top: 20vh;
+}
+
+.video {
+    width: 40vw;
+    height: 40vh;
+}
+
+@media screen and (max-width: 768px) {
+    .video {
+        width: 80vw;
+        height: 20vh;
+    }
 }
