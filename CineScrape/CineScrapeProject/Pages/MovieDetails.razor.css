@@ -58,17 +58,17 @@
     margin: 2vh 10vh;
 }
 
-#casts{
+#casts {
     display: flex;
     flex-wrap: wrap;
     gap: 2vh 2vw;
     margin: 5vh 5vw;
+    justify-content: center;
 }
 
 #title-cast{
     text-align: center;
     margin-top: 5vh;
-    font-weight: bold;
 }
 
 .figure {
@@ -93,4 +93,39 @@ td.review-photo > img{
 #trailer-container {
     display: flex;
     justify-content: center;
+}
+
+#table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+
+th {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.header-info {
+    font-family: cursive;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.header-info:before {
+    position: absolute;
+    content: "";
+    height: 1.1em;
+    border-left: 3px solid #fa320a;
+    margin: -1px 0 0 -9px;
 }
