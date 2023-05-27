@@ -3,6 +3,7 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 2vh 5vw;
     width: 90%;
+    margin-top: 5vh;
 }
 
 .card-body {
@@ -24,4 +25,21 @@
 
 a{
     text-decoration: none;
+}
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.form-select {
+    width: 20vw;
+}
+
+.form-control {
+    width: 40vw;
 }
