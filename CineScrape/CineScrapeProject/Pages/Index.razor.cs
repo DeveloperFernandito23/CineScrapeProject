@@ -28,7 +28,7 @@ namespace CineScrapeProject.Pages
 		List<ToastMessage> messages = new();
 
 		private PieConfig _pieConfig = new();
-		private List<string> _casasolors = new List<string>();
+		private List<string> _colorsList = new List<string>();
 		private PieConfig _doughConfig = new();
 		private PolarAreaConfig _polarConfig = new();
 		private BarConfig _barConfig = new();
@@ -153,7 +153,7 @@ namespace CineScrapeProject.Pages
 			for (int i = 0; i < 30; i++)
 			{
 				string color = ColorUtil.RandomColorString();
-				_casasolors.Add(color);
+				_colorsList.Add(color);
 			}
 		}
 		private async Task MakeStadistics()
@@ -322,7 +322,7 @@ namespace CineScrapeProject.Pages
 			PieDataset<int> dataset = new PieDataset<int>()
 			{
 
-				BackgroundColor =  _casasolors.Take(Stadistics.Count).ToArray()
+				BackgroundColor =  _colorsList.Take(Stadistics.Count).ToArray()
 			};
 			foreach (Slot slot in Stadistics)
 			{
@@ -344,7 +344,7 @@ namespace CineScrapeProject.Pages
 			PieDataset<int> dataset = new PieDataset<int>()
 			{
 
-				BackgroundColor = _casasolors.Take(Stadistics.Count).ToArray()
+				BackgroundColor = _colorsList.Take(Stadistics.Count).ToArray()
 			};
 			foreach (Slot slot in Stadistics)
 			{
@@ -364,7 +364,7 @@ namespace CineScrapeProject.Pages
 
 			BarDataset<int> dataset = new BarDataset<int>()
 			{
-				BackgroundColor = _casasolors.Take(Stadistics.Count).ToArray(),
+				BackgroundColor = _colorsList.Take(Stadistics.Count).ToArray(),
 				Label = "Runtime of the movies"
 			};
 			foreach (Slot slot in Stadistics)	
@@ -386,7 +386,7 @@ namespace CineScrapeProject.Pages
 			PolarAreaDataset<int> dataset = new PolarAreaDataset<int>()
 			{
 
-				BackgroundColor = _casasolors.Take(Stadistics.Count).ToArray()
+				BackgroundColor = _colorsList.Take(Stadistics.Count).ToArray()
 			};
 			foreach (Slot slot in Stadistics)
 			{
