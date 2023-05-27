@@ -12,6 +12,12 @@ a, .btn-link {
     color: #0071c1;
 }
 
+p[role = "alert"] {
+    font-size: 8vw;
+    color: red;
+    font-weight: bold;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;

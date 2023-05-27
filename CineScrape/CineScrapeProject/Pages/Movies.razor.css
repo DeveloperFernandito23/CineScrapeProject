@@ -7,6 +7,10 @@
     margin-top: 5vh;
 }
 
+#card{
+    border-radius: 5px;
+}
+
 .card-body {
     display: flex;
     flex-direction: row;
@@ -58,4 +62,38 @@ header {
     width: 80%;
     height: 200px;
     background-color: rgba(128, 128, 128, 0.4)
+}
+
+.btn-primary {
+    background-color: rgb(142,25,55) !important;
+    border-color: rgb(83,12,67) !important;
+}
+
+.btn-primary.active {
+    background-color: rgb(187,35,47) !important;
+    border-color: rgb(58,6,71) !important;
+}
+
+.btn:focus {
+    box-shadow: none !important;
+}
+
+#filter-gender {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 15px;
+}
+
+#filter-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    gap: 10px;
 }

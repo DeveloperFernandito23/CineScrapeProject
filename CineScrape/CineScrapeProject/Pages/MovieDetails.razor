@@ -142,8 +142,8 @@
 	<div id="reviews" class="table-responsive">
 
 		<div id="pagination-container">
-			Page: <input type="number" min="1" max="@MaxPage" @bind="@Page" />
-			Pagination: <input type="number" min="1" max="@Movie.Reviews.Count" @bind="Limit" />
+			<div><strong>Page: </strong><input type="number" min="1" max="@MaxPage" @bind="@Page" /></div>
+			<div><strong>Pagination:</strong><input type="number" min="1" max="@Movie.Reviews.Count" @bind="Limit" /></div>
 		</div>
 
 		<table id="table">

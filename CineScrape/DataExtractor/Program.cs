@@ -105,7 +105,6 @@ namespace DataExtractor
 			var poster = await posterContainer.EvaluateHandleAsync("container => container.shadowRoot.querySelector('slot[name = \"image\"]').assignedNodes()[0].getAttribute('src')");
 
 			movie.PosterURL = poster.ToString();
-			Console.WriteLine(poster.ToString());
 		}
 		public static async Task GetTitleAsync(IPage page, Movie movie)
 		{
@@ -173,7 +172,6 @@ namespace DataExtractor
 
 				cast.Character = CheckCharacter(character.Trim('\n', ' '));
 
-				Console.WriteLine();
 				movie.Casts.Add(cast);
 			}
 
@@ -207,8 +205,6 @@ namespace DataExtractor
 
 			movie.RateCritic = rateCriticValue != "--" ? int.Parse(rateCriticValue) : null;
 			movie.RateAudience = rateAudienceValue != "--" ? int.Parse(rateAudienceValue) : null;
-
-			Console.WriteLine($", Crítica: {movie.RateCritic}, Audiencia: {movie.RateAudience}");
 		}
 		public static async Task GetPlatformsAsync(IPage page, Movie movie)
 		{
