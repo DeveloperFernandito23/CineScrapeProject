@@ -300,11 +300,10 @@ namespace CineScrapeProject.Pages
 		}
 		private void ShowMessage(ToastType toastType) => messages.Add(CreateToastMessage(toastType));
 
-		private ToastMessage CreateToastMessage(ToastType toastType)
-		=> new ToastMessage
+		private ToastMessage CreateToastMessage(ToastType toastType) => new ToastMessage()
 		{
 			Type = toastType,
-			Title = "Blazor Bootstrap",
+			Title = "CINESCRAPE",
 			HelpText = $"{DateTime.Now}",
 			Message = $"Hello, world! This is a toast message. DateTime: {DateTime.Now}",
 		};

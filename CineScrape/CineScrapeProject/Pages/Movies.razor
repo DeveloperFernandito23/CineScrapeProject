@@ -35,10 +35,17 @@
 		<div id="filter-gender">
 			@foreach (var item in Genders)
 			{
-				<button type="button" class="btn btn-primary @(TotalFilters[0].Contains(item.Name) ? "active" : "")" aria-pressed="false" autocomplete="off" @onclick="() => FilterGender(item.Name, (!TotalFilters[0].Contains(item.Name) ? true : false))">@item.Name</button>
+				bool contains = TotalFilters[0].Contains(item.Name);
+
+				<button type="button" class="btn btn-primary @( contains? "active" : "")" aria-pressed="false" autocomplete="off" @onclick="() => FilterGender(item.Name, (!contains ? true : false))">@item.Name</button>
 			}
 		</div>
+
+		
+		<button type="button" class="btn btn-primary" aria-pressed="false" autocomplete="off" @onclick="() => RestartFilters()">Reset Filters...</button>
+		
 	</div>
+
 
 	<div class="container" id="movies-list">
 		@foreach (var item in SearchMovie(MovieList))

@@ -1,5 +1,6 @@
 using CineScrapeProject.Models;
 using CineScrapeProject.wwwroot.Models;
+using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
 
 namespace CineScrapeProject.Pages
@@ -35,9 +36,11 @@ namespace CineScrapeProject.Pages
 			{
 				new()
 			};
+
+			MovieList = MoviesOn;
 		}
 
-		private void MakeFilters()
+		private void MakeFilters() //LO DE LOS FILTROS ESTABA PENSADO PARA PODER FILTRARLOS POR GÉNERO, RATE, ETC... LO QUE PASA ES QUE NO NOS HA DADO TIEMPO, PERO ESTÁ HECHO PARA FUTURAS APLIACIONES, POR ESO ES UNA LISTA Y SE COJE LA POSICIÓN 0 YA QUE LAS DEMÁS POSICIONES IBAN A SER LOS DEMÁS FILTROS :(((
 		{
 			List<Movie> movies = new();
 
@@ -91,10 +94,8 @@ namespace CineScrapeProject.Pages
 			WhereSee();
 
 			Genders = AllMovies.GenderFilter();
-
-			RestartFilters();
 		}
-
+		
 		protected override async Task OnParametersSetAsync() => RestartFilters();
 
 		private void WhereSee()
