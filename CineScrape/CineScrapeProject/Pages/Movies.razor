@@ -27,9 +27,19 @@
 		<select class="form-select" @bind="SeeOption">
 			<option value="@See.Cinema">In Cinema</option>
 			<option value="@See.Home">At Home</option>
-			<option value="@See.ComingSoon">Coming Soon...</option>
+			<option value="@See.ComingSoon">Coming Soon...</option>++
 		</select>
 	</header>
+
+	<div id="filters-container">
+		<div id="filter-gender">
+			@foreach (var item in Genders)
+			{
+				<button type="button" class="btn btn-primary @(TotalFilters[0].Contains(item.Name) ? "active" : "")" aria-pressed="false" autocomplete="off" @onclick="() => FilterGender(item.Name, (!TotalFilters[0].Contains(item.Name) ? true : false))">@item.Name</button>
+			}
+		</div>
+	</div>
+
 	<div class="container" id="movies-list">
 		@foreach (var item in SearchMovie(MovieList))
 		{

@@ -16,13 +16,71 @@ namespace CineScrapeProject.Pages
 		private string _searchvalue = "";
 		private List<Slot> _genders = new();
 		private See _seeOption = See.Cinema;
+		private List<List<string>> _totalFilters = new();
+		private List<Movie> _moviesOn = new();
 
+			 
 		public List<Movie> AllMovies { get => _allMovies; set => _allMovies = value; }
 		public List<Movie> MovieList { get => _movieList; set => _movieList = value; }
 		public List<List<Movie>> FiltersMovies { get => _filtersMovies; set => _filtersMovies = value; }
 		public string SearchValue { get => _searchvalue; set => _searchvalue = value; }
 		public List<Slot> Genders { get => _genders; set => _genders = value; }
 		private See SeeOption { get => _seeOption; set { _seeOption = value; WhereSee(); } }
+		public List<List<string>> TotalFilters { get => _totalFilters; set => _totalFilters = value; }
+		public List<Movie> MoviesOn { get => _moviesOn; set => _moviesOn = value; }
+
+		private void RestartFilters()
+		{
+			TotalFilters = new()
+			{
+				new()
+			};
+		}
+
+		private void MakeFilters()
+		{
+			List<Movie> movies = new();
+
+			MoviesOn.ForEach(movie =>
+			{
+				if (movie.Characteristics.TryGetValue("Genre", out string value))
+				{
+					List<string> genders = new();
+
+					bool add = true;
+
+					for (int i = 0; add && i < TotalFilters[0].Count; i++)
+					{
+						if (!value.Contains(TotalFilters[0][i])) add = false;
+					}
+
+					if (add) movies.Add(movie);
+				}
+			});
+
+			if (TotalFilters.SelectMany(x => x).Count() > 0)
+			{
+				MovieList = movies;
+			}
+			else
+			{
+				WhereSee();
+			}
+		}
+
+		private void FilterGender(string value, bool add)
+		{
+			if (add)
+			{
+				if (!TotalFilters[0].Contains(value)) TotalFilters[0].Add(value);
+			}
+			else
+			{
+				TotalFilters[0].Remove(value);
+			}
+
+			MakeFilters();
+		}
 
 		protected override async Task OnInitializedAsync()
 		{
@@ -34,26 +92,27 @@ namespace CineScrapeProject.Pages
 
 			Genders = AllMovies.GenderFilter();
 
+			RestartFilters();
 		}
+
+		protected override async Task OnParametersSetAsync() => RestartFilters();
 
 		private void WhereSee()
 		{
-			List<Movie> movies = new();
-
 			switch (SeeOption)
 			{
 				case See.Cinema:
-					movies = Cinema();
+					MoviesOn = Cinema();
 					break;
 				case See.Home:
-					movies = AtHome();
+					MoviesOn = AtHome();
 					break;
 				case See.ComingSoon:
-					movies = ComingSoon();
+					MoviesOn = ComingSoon();
 					break;
 			}
 
-			MovieList = movies;
+			MovieList = MoviesOn;
 		}
 
 		private List<Movie> Cinema()
