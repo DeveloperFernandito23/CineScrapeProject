@@ -1,4 +1,7 @@
 using BlazorBootstrap;
+using ChartJs.Blazor.Common;
+using ChartJs.Blazor.PieChart;
+using ChartJs.Blazor.Util;
 using CineScrapeProject.Models;
 using CineScrapeProject.wwwroot.Models;
 using System.Net.Http.Json;
@@ -19,6 +22,7 @@ namespace CineScrapeProject.Pages
 
 		List<ToastMessage> messages = new();
 
+		private PieConfig _config;
 		private List<Slot> _stadistics = new();
 		private Filters _filterOption = Filters.RateCritics;
 		private List<Slot> _genders = new();
@@ -39,6 +43,43 @@ namespace CineScrapeProject.Pages
 		}
 		protected override void OnParametersSet() => MakeStadistics();
 
+		protected override void OnInitialized()
+		{
+			_config = new PieConfig
+			{
+				Options = new PieOptions
+				{
+					Responsive = true,
+					Title = new OptionsTitle
+					{
+						Display = true,
+						Text = "ChartJs.Blazor Pie Chart"
+					}
+				}
+			};
+
+			foreach (Slot slot in _stadistics)
+			{
+				_config.Data.Labels.Add(slot.Name);
+			}
+
+			PieDataset<int> dataset = new PieDataset<int>()
+			{
+
+				BackgroundColor = new[]
+				{
+					ColorUtil.ColorHexString(255, 99, 132), // Slice 1 aka "Red"
+					ColorUtil.ColorHexString(255, 205, 86), // Slice 2 aka "Yellow"
+					ColorUtil.ColorHexString(75, 192, 192), // Slice 3 aka "Green"
+					ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
+				}
+			};
+			foreach (Slot slot in _stadistics)
+			{
+				dataset.Add(slot.Count);
+			}
+			_config.Data.Datasets.Add(dataset);
+		}
 		private void MakeStadistics()
 		{
 			List<Slot> results = new();
