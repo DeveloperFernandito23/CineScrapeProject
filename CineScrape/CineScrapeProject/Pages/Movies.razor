@@ -6,9 +6,14 @@
 
 
 <div id="main-page">
-	<div id="search-container">
+	<nav>
 		<input type="text" @bind="@SearchValue" placeholder="MovieFinder..."/>
-	</div>
+		<select @bind="SeeOption">
+			<option value="@See.Cinema">In Cinema</option>
+			<option value="@See.Home">At Home</option>
+			<option value="@See.ComingSoon">Coming Soon...</option>
+		</select>
+	</nav>
 	<div class="container" id="movies-list">
 		@foreach (var item in SearchMovie(MovieList))
 		{

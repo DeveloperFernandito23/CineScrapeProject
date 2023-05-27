@@ -46,7 +46,7 @@
 			@foreach (var item in Movie.Characteristics)
 			{
 				<li class="list-group-item">
-					<strong>@(item.Key):</strong> @item.Value
+					<strong>@(item.Key):</strong> @(item.Key.Contains("Release Date") ? DateTime.Parse(@item.Value).PrintDate() : item.Value)
 				</li>
 			}
 		</ul>
@@ -131,7 +131,7 @@
 						<td class="review-name">@item.Name</td>
 						<td class="review-message">@item.Message</td>
 						<td class="review-fullreview"><a href="@item.FullReview">Full Review</a></td>
-						<td class="review-date">@PrintDate(item.Date)</td>
+						<td class="review-date">@item.Date.PrintDate()</td>
 					</tr>
 				}
 			</tbody>

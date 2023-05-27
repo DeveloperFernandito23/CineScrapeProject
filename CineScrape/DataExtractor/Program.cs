@@ -61,15 +61,15 @@ namespace DataExtractor
 		{
 			int id = 1;
 
-			foreach (string url in _urlList)
-			{
+			//foreach (string url in _urlList)
+			//{
 				Movie movie = new();
 
 				movie.Id = id++;
 
-				string newUrl = $"{MAINURL}{url}";
+				//string newUrl = $"{MAINURL}{url}";
 
-				//string newUrl = "https://www.rottentomatoes.com/m/the_super_mario_bros_movie";
+				string newUrl = "https://www.rottentomatoes.com/m/the_super_mario_bros_movie";
 
 				await page.GotoAsync(newUrl);
 
@@ -92,7 +92,7 @@ namespace DataExtractor
 				await GetTrailerAsync(page, movie);
 
 				_movies.Add(movie);
-			}
+			//}
 
 			string moviesJSON = JsonSerializer.Serialize<List<Movie>>(_movies);
 
@@ -145,8 +145,11 @@ namespace DataExtractor
 				var value = await item.QuerySelectorAsync("span");
 
 				var labelText = await label.InnerTextAsync();
+				var valueText = await value.InnerTextAsync();
 
-				movie.Characteristics.Add(labelText.TrimEnd(':'), await value.InnerTextAsync());
+				valueText = labelText.Contains("Release Date") ? DateTime.Parse(valueText.Split("\u00A0")[0].Trim()).ToString() : valueText;
+
+				movie.Characteristics.Add(labelText.TrimEnd(':'), valueText);
 			}
 		}
 		public static async Task GetCastAsync(IPage page, Movie movie)

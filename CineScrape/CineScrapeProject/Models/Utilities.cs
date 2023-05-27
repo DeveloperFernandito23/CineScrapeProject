@@ -5,9 +5,25 @@ namespace CineScrapeProject.Models
 {
 	public static class Utilities
 	{
+		private enum Months { Jan, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dec }
+
+
 		public static readonly string PATH = "sample-data/movies.json";
 
 		public static string NullCritic(this int? num) => num.HasValue ? $"{num.Value}%" : "--";
+
+		public static string PrintDate(this DateTime date)
+		{
+			string[] dateString = date.ToString().Split(' ')[0].Split('/');
+
+			Months month = (Months)(int.Parse(dateString[1]) - 1);
+
+			int day = int.Parse(dateString[0]);
+
+			int year = int.Parse(dateString[2]);
+
+			return $"{month} {day}, {year}";
+		}
 
 		public static List<Slot> PlatformFilter(this IEnumerable<Platform> source)
 		{

@@ -16,5 +16,21 @@ namespace CineScrapeProject.wwwroot.Models
 
 		[JsonPropertyName("urlSite")]
 		public string UrlSite { get => _urlSite; set => _urlSite = value; }
+
+		public override bool Equals(object obj)
+		{
+			Platform other = obj as Platform;
+			bool result = false;
+
+			if(other != null)
+			{
+				if (Name == other.Name)
+				{
+					result = true;
+				}
+			}
+
+			return result;
+		}
 	}
 }

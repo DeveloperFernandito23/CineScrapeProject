@@ -7,10 +7,10 @@ namespace CineScrapeProject.Pages
 {
 	public partial class MovieDetails
 	{
+		private enum Order { Latest, Oldest }
+
 		private const int LIMIT = 10;
 		private const string CAROUSEL_HTML_ID = "carousel";
-		private enum Months { Jan, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dec }
-		private enum Order { Latest, Oldest }
 
 		private List<Movie> _movies = new();
 		private Movie _movie = new();
@@ -149,20 +149,6 @@ namespace CineScrapeProject.Pages
 				MaxPage = (int)Math.Ceiling((double)Movie.Reviews.Count / 10);
 			}
 		}
-
-		private string PrintDate(DateTime date)
-		{
-			string[] dateString = date.ToString().Split(' ')[0].Split('/');
-
-			Months month = (Months)(int.Parse(dateString[1]) - 1);
-
-			int day = int.Parse(dateString[0]);
-
-			int year = int.Parse(dateString[2]);
-
-			return $"{month} {day}, {year}";
-		}
-
 		private List<Review> Pagination(List<Review> allReviews) => OrderByDate(allReviews.Count > LIMIT ? PaginationReviews[Page - 1] : allReviews);
 	}
 }
