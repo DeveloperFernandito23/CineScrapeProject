@@ -1,6 +1,7 @@
 using BlazorBootstrap;
 using ChartJs.Blazor.Common;
 using ChartJs.Blazor.PieChart;
+using ChartJs.Blazor.PolarAreaChart;
 using ChartJs.Blazor.Util;
 using CineScrapeProject.Models;
 using CineScrapeProject.wwwroot.Models;
@@ -22,7 +23,7 @@ namespace CineScrapeProject.Pages
 
 		List<ToastMessage> messages = new();
 
-		private PieConfig _config;
+		private PieConfig _config = new ();
 		private List<Slot> _stadistics = new();
 		private Filters _filterOption = Filters.RateCritics;
 		private List<Slot> _genders = new();
@@ -32,6 +33,7 @@ namespace CineScrapeProject.Pages
 		private Filters FilterOption { get => _filterOption; set { _filterOption = value; MakeStadistics(); } }
 
 		public List<Slot> Genders { get => _genders; set => _genders = value; }
+		public PieConfig Config { get => _config; set => _config = value; }
 
 		protected override async Task OnInitializedAsync()
 		{
@@ -40,12 +42,13 @@ namespace CineScrapeProject.Pages
 			Genders = MovieList.GenderFilter();
 
 			ShowMessage(ToastType.Success);
-		}
-		protected override void OnParametersSet() => MakeStadistics();
 
-		protected override void OnInitialized()
+		}
+
+
+		private async Task CreateCharts()
 		{
-			_config = new PieConfig
+			Config = new PieConfig
 			{
 				Options = new PieOptions
 				{
@@ -57,10 +60,20 @@ namespace CineScrapeProject.Pages
 					}
 				}
 			};
+		}
+		protected override async Task OnParametersSetAsync()
+		{
+			await MakeStadistics();
+		}
 
-			foreach (Slot slot in _stadistics)
+		private async Task FillChart()
+		{
+			Config.Data.Labels.Clear();
+			Config.Data.Datasets.Clear();
+
+			foreach (Slot slot in Stadistics)
 			{
-				_config.Data.Labels.Add(slot.Name);
+				Config.Data.Labels.Add(slot.Name);
 			}
 
 			PieDataset<int> dataset = new PieDataset<int>()
@@ -74,13 +87,19 @@ namespace CineScrapeProject.Pages
 					ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
 				}
 			};
-			foreach (Slot slot in _stadistics)
+			foreach (Slot slot in Stadistics)
 			{
 				dataset.Add(slot.Count);
 			}
-			_config.Data.Datasets.Add(dataset);
+			Config.Data.Datasets.Add(dataset);
 		}
-		private void MakeStadistics()
+
+
+		protected override void OnInitialized()
+		{
+			CreateCharts();
+		}
+		private async Task MakeStadistics()
 		{
 			List<Slot> results = new();
 
@@ -104,6 +123,9 @@ namespace CineScrapeProject.Pages
 			}
 
 			Stadistics = results;
+
+
+			await FillChart();
 		}
 
 		private List<Slot> RateStats(Filters filter)
