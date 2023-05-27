@@ -7,6 +7,7 @@ using ChartJs.Blazor.ScatterChart;
 using ChartJs.Blazor.Util;
 using CineScrapeProject.Models;
 using CineScrapeProject.wwwroot.Models;
+using System.Drawing;
 using System.Net.Http.Json;
 using System.Reflection.Emit;
 
@@ -27,6 +28,7 @@ namespace CineScrapeProject.Pages
 		List<ToastMessage> messages = new();
 
 		private PieConfig _pieConfig = new();
+		private List<string> _casasolors = new List<string>();
 		private PieConfig _doughConfig = new();
 		private PolarAreaConfig _polarConfig = new();
 		private BarConfig _barConfig = new();
@@ -52,6 +54,7 @@ namespace CineScrapeProject.Pages
 
 			ShowMessage(ToastType.Success);
 
+			ColorUtil.RandomColorString();
 		}
 
 
@@ -101,6 +104,19 @@ namespace CineScrapeProject.Pages
 
 				}
 			};
+
+			PolarConfig = new PolarAreaConfig
+			{
+				Options = new PolarAreaOptions
+				{
+					Responsive = true,
+					Title = new OptionsTitle
+					{
+						Display = true,
+						Text = "alksjals"
+					}
+				}
+			};
 		}
 		protected override async Task OnParametersSetAsync()
 		{
@@ -119,7 +135,7 @@ namespace CineScrapeProject.Pages
 					FillBarChart();
 					break;
 				case Filters.Genders:
-					
+					FillPolarChart();
 					break;
 				default:
 					FillPieChart();
@@ -133,6 +149,12 @@ namespace CineScrapeProject.Pages
 		protected override void OnInitialized()
 		{
 			CreateCharts();
+
+			for (int i = 0; i < 30; i++)
+			{
+				string color = ColorUtil.RandomColorString();
+				_casasolors.Add(color);
+			}
 		}
 		private async Task MakeStadistics()
 		{
@@ -300,13 +322,7 @@ namespace CineScrapeProject.Pages
 			PieDataset<int> dataset = new PieDataset<int>()
 			{
 
-				BackgroundColor = new[]
-				{
-							ColorUtil.ColorHexString(255, 99, 132), // Slice 1 aka "Red"
-							ColorUtil.ColorHexString(255, 205, 86), // Slice 2 aka "Yellow"
-							ColorUtil.ColorHexString(75, 192, 192), // Slice 3 aka "Green"
-							ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
-						}
+				BackgroundColor =  _casasolors.Take(Stadistics.Count).ToArray()
 			};
 			foreach (Slot slot in Stadistics)
 			{
@@ -328,22 +344,7 @@ namespace CineScrapeProject.Pages
 			PieDataset<int> dataset = new PieDataset<int>()
 			{
 
-				BackgroundColor = new[]
-				{
-							ColorUtil.ColorHexString(255, 99, 132), // Slice 1 aka "Red"
-							ColorUtil.ColorHexString(255, 205, 86), // Slice 2 aka "Yellow"
-							ColorUtil.ColorHexString(75, 192, 192), // Slice 3 aka "Green"
-							ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString()
-				}
+				BackgroundColor = _casasolors.Take(Stadistics.Count).ToArray()
 			};
 			foreach (Slot slot in Stadistics)
 			{
@@ -363,22 +364,7 @@ namespace CineScrapeProject.Pages
 
 			BarDataset<int> dataset = new BarDataset<int>()
 			{
-
-				BackgroundColor = new[]
-				{
-							ColorUtil.ColorHexString(255, 99, 132), // Slice 1 aka "Red"
-							ColorUtil.ColorHexString(255, 205, 86), // Slice 2 aka "Yellow"
-							ColorUtil.ColorHexString(75, 192, 192), // Slice 3 aka "Green"
-							ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString(),
-							ColorUtil.RandomColorString()
-				},
+				BackgroundColor = _casasolors.Take(Stadistics.Count).ToArray(),
 				Label = "Runtime of the movies"
 			};
 			foreach (Slot slot in Stadistics)	
@@ -386,6 +372,27 @@ namespace CineScrapeProject.Pages
 				dataset.Add(slot.Count);
 			}
 			BarConfig.Data.Datasets.Add(dataset);
+		}
+		private void FillPolarChart()
+		{
+			PolarConfig.Data.Labels.Clear();
+			PolarConfig.Data.Datasets.Clear();
+
+			foreach (Slot slot in Stadistics)
+			{
+				PolarConfig.Data.Labels.Add(slot.Name);
+			}
+
+			PolarAreaDataset<int> dataset = new PolarAreaDataset<int>()
+			{
+
+				BackgroundColor = _casasolors.Take(Stadistics.Count).ToArray()
+			};
+			foreach (Slot slot in Stadistics)
+			{
+				dataset.Add(slot.Count);
+			}
+			PolarConfig.Data.Datasets.Add(dataset);
 		}
 	}
 }
