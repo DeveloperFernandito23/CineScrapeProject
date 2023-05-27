@@ -22,12 +22,15 @@
 	</div>
 </div>
 
-@if (prueba)
-{
-	<Chart Config="DoughConfig"></Chart>
-}
-else
-{
-	<Chart Config="_pieConfig"></Chart>
+<div class="@((FilterOption == Filters.RateCritics || FilterOption == Filters.RateAudience  ) ? "d-block" : "d-none")">
+	<Chart Config="PieConfig"></Chart>
+</div>
 
-}
+<div class="@((FilterOption == Filters.Platforms) ? "d-block" : "d-none")">
+	<Chart Config="DoughConfig"></Chart>
+</div>
+
+<div class="@((FilterOption == Filters.Runtime) ? "d-block" : "d-none")">
+	<Chart Config="BarConfig"></Chart>
+</div>
+

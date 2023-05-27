@@ -1,11 +1,14 @@
 using BlazorBootstrap;
+using ChartJs.Blazor.BarChart;
 using ChartJs.Blazor.Common;
 using ChartJs.Blazor.PieChart;
 using ChartJs.Blazor.PolarAreaChart;
+using ChartJs.Blazor.ScatterChart;
 using ChartJs.Blazor.Util;
 using CineScrapeProject.Models;
 using CineScrapeProject.wwwroot.Models;
 using System.Net.Http.Json;
+using System.Reflection.Emit;
 
 namespace CineScrapeProject.Pages
 {
@@ -26,10 +29,10 @@ namespace CineScrapeProject.Pages
 		private PieConfig _pieConfig = new();
 		private PieConfig _doughConfig = new();
 		private PolarAreaConfig _polarConfig = new();
+		private BarConfig _barConfig = new();
 		private List<Slot> _stadistics = new();
 		private Filters _filterOption = Filters.RateCritics;
 		private List<Slot> _genders = new();
-		private bool prueba = false;
 
 		public List<Movie> MovieList { get; set; }
 		public List<Slot> Stadistics { get => _stadistics; set => _stadistics = value; }
@@ -39,6 +42,7 @@ namespace CineScrapeProject.Pages
 		public PieConfig PieConfig { get => _pieConfig; set => _pieConfig = value; }
 		public PieConfig DoughConfig { get => _doughConfig; set => _doughConfig = value; }
 		public PolarAreaConfig PolarConfig { get => _polarConfig; set => _polarConfig = value; }
+		public BarConfig BarConfig { get => _barConfig; set => _barConfig = value; }
 
 		protected override async Task OnInitializedAsync()
 		{
@@ -79,6 +83,24 @@ namespace CineScrapeProject.Pages
 					}
 				}
 			};
+
+			BarConfig = new BarConfig
+			{
+				Options = new BarOptions
+				{
+					Responsive = true,
+					Title = new OptionsTitle
+					{
+						Display = true,
+						Text = "ChartJs.Blazor Pie Chart"
+					},
+					Legend = new Legend
+					{
+						Display = true,
+					}
+
+				}
+			};
 		}
 		protected override async Task OnParametersSetAsync()
 		{
@@ -91,14 +113,13 @@ namespace CineScrapeProject.Pages
 			switch (FilterOption)
 			{
 				case Filters.Platforms:
-					prueba = true;
 					FillDoughChart();
 					break;
 				case Filters.Runtime:
-
+					FillBarChart();
 					break;
 				case Filters.Genders:
-
+					
 					break;
 				default:
 					FillPieChart();
@@ -108,7 +129,7 @@ namespace CineScrapeProject.Pages
 
 		}
 
-
+		
 		protected override void OnInitialized()
 		{
 			CreateCharts();
@@ -329,6 +350,42 @@ namespace CineScrapeProject.Pages
 				dataset.Add(slot.Count);
 			}
 			DoughConfig.Data.Datasets.Add(dataset);
+		}
+		private void FillBarChart()
+		{
+			BarConfig.Data.Labels.Clear();
+			BarConfig.Data.Datasets.Clear();
+
+			foreach (Slot slot in Stadistics)
+			{
+				BarConfig.Data.Labels.Add(slot.Name);
+			}
+
+			BarDataset<int> dataset = new BarDataset<int>()
+			{
+
+				BackgroundColor = new[]
+				{
+							ColorUtil.ColorHexString(255, 99, 132), // Slice 1 aka "Red"
+							ColorUtil.ColorHexString(255, 205, 86), // Slice 2 aka "Yellow"
+							ColorUtil.ColorHexString(75, 192, 192), // Slice 3 aka "Green"
+							ColorUtil.ColorHexString(54, 162, 235), // Slice 4 aka "Blue"
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString(),
+							ColorUtil.RandomColorString()
+				},
+				Label = "Runtime of the movies"
+			};
+			foreach (Slot slot in Stadistics)	
+			{
+				dataset.Add(slot.Count);
+			}
+			BarConfig.Data.Datasets.Add(dataset);
 		}
 	}
 }
