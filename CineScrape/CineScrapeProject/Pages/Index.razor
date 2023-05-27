@@ -5,8 +5,13 @@
 <PageTitle>CineScrape</PageTitle>
 <Toasts class="p-3" Messages="messages" AutoHide="true" Delay="6000" Placement="ToastsPlacement.TopRight" />
 <div id="main-page">
+	<h1 id="title">CINESCRAPE</h1>
+	<div id="description-container">
+		<p class="description">We are a company dedicated to providing information to users so they can know at any time where and when to see their favorite movie.</p> 
+		<p class="description">We are grateful that you use our page and hope you like it :)</p>	
+	</div>
 	<div id="grafic-container">
-		<select @bind="FilterOption">
+		<select @bind="FilterOption" class="form-select">
 			<option value="@Filters.RateCritics">Critics</option>
 			<option value="@Filters.RateAudience">Audience</option>
 			<option value="@Filters.Platforms">Platforms</option>

@@ -1,0 +1,18 @@
+﻿#title{
+    text-transform: uppercase;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10vh;
+}
+
+.description{
+    text-align: center;
+    font-family: cursive;
+}
+
+#description-container{
+    width: 60%;
+    margin: auto;
+    margin-bottom: 10vh;
+}
