@@ -54,6 +54,8 @@ namespace CineScrapeProject.Pages
 
 			allReviews = OrderByDate(allReviews);
 
+			Page = 1;
+
 			Reviews = allReviews;
 
 			List<Review> reviewsPaginated = new();
