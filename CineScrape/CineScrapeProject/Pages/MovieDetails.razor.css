@@ -8,9 +8,10 @@
 }
 
 #movie-title{
-    text-align: center;
     text-transform: uppercase;
     font-weight: bold;
+    font-family: cursive;
+    font-size: 2rem;
 }
 
 #rate-container {
@@ -77,4 +78,19 @@
 td.review-photo > img{
     width: 50px;
     height: 50px;
+}
+
+.audience-container, .critic-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#img-card{
+    width: 80px;
+}
+
+#trailer-container {
+    display: flex;
+    justify-content: center;
 }

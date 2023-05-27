@@ -16,8 +16,18 @@
 			<div id="title-container">
 				<p id="movie-title">@Movie.Title</p>
 				<div id="rate-container">
-					<p id="rate-critic">@Movie.RateCritic.NullCritic()</p>
-					<p id="rate-audience">@Movie.RateAudience.NullCritic()</p>
+					<div class="critic-container">
+						<abbr title="Critic">
+							<img id="img-card" src="./critic-img.png">
+						</abbr>
+						<p id="rate-critic">@Movie.RateCritic.NullCritic() </p>
+					</div>
+					<div class="audience-container">
+						<abbr title="Audience">
+							<img id="img-card" src="./audience-img.png">
+						</abbr>
+						<p id="rate-audience">@Movie.RateAudience.NullCritic()</p>
+					</div>
 				</div>
 			</div>
 			<div id="trailer-container">
