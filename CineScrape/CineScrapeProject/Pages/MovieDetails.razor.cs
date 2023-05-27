@@ -9,7 +9,6 @@ namespace CineScrapeProject.Pages
 	{
 		private enum Order { Latest, Oldest }
 
-		private const int LIMIT = 10;
 		private const string CAROUSEL_HTML_ID = "carousel";
 
 		private List<Movie> _movies = new();
@@ -19,6 +18,7 @@ namespace CineScrapeProject.Pages
 		private string _searchMessage;
 		private List<List<Review>> _paginationReviews = new();
 		private int _page = 1;
+		private int _limit = 10;
 		private int _count = 0;
 		private Order _orderOption = Order.Latest;
 
@@ -33,6 +33,7 @@ namespace CineScrapeProject.Pages
 
 		public List<List<Review>> PaginationReviews { get => _paginationReviews; set => _paginationReviews = value; }
 		public int Page { get => _page; set => _page = value > 0 && value <= PaginationReviews.Count ? value : 1; }
+		public int Limit { get => _limit; set { _limit = value > 0 && value <= Movie.Reviews.Count ? value : 10; MakePagination(Reviews); } }
 		public int MaxPage { get; set; }
 		private Order OrderOption { get => _orderOption; set { _orderOption = value; RestartReviews(); SearchName = ""; SearchMessage = ""; } }
 
@@ -55,9 +56,9 @@ namespace CineScrapeProject.Pages
 
 			Reviews = allReviews;
 
-			List<Review> reviewsPaginated = new List<Review>();
+			List<Review> reviewsPaginated = new();
 
-			int limitPosition = LIMIT - 1;
+			int limitPosition = Limit - 1;
 			int totalCount = allReviews.Count;
 
 			for (int i = 0; i < totalCount; i++)
@@ -67,10 +68,12 @@ namespace CineScrapeProject.Pages
 				if (i == limitPosition || i == totalCount - 1)
 				{
 					PaginationReviews.Add(reviewsPaginated);
-					limitPosition += LIMIT;
+					limitPosition += Limit;
 					reviewsPaginated = new();
 				}
 			}
+
+			MaxPage = PaginationReviews.Count;
 		}
 
 		private Movie GetMovie(List<Movie> movies, string movieId)
@@ -149,6 +152,6 @@ namespace CineScrapeProject.Pages
 				MaxPage = (int)Math.Ceiling((double)Movie.Reviews.Count / 10);
 			}
 		}
-		private List<Review> Pagination(List<Review> allReviews) => OrderByDate(allReviews.Count > LIMIT ? PaginationReviews[Page - 1] : allReviews);
+		private List<Review> Pagination(List<Review> allReviews) => OrderByDate(allReviews.Count > Limit ? PaginationReviews[Page - 1] : allReviews);
 	}
 }

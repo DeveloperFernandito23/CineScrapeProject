@@ -106,8 +106,8 @@
 	<div id="reviews">
 
 		<div id="pagination-container">
-			<input type="number" min="1" max="@MaxPage" @bind="@Page" />
-			@*<input type="number" min="1" max="@Movie.Reviews.Count" @bind="Limit" />*@
+			Page: <input type="number" min="1" max="@MaxPage" @bind="@Page" />
+			Pagination: <input type="number" min="1" max="@Movie.Reviews.Count" @bind="Limit" />
 		</div>
 
 		<table id="table">
@@ -121,8 +121,8 @@
 				</tr>
 				<tr>
 					<th></th>
-					<th><input type="text" @bind="@SearchName" /></th>
-					<th><input type="text" @bind="@SearchMessage" /></th>
+					<th><input type="text" @bind="@SearchName" placeholder="Search Name..."/></th>
+					<th><input type="text" @bind="@SearchMessage" placeholder="Search Message..." /></th>
 					<th></th>
 					<th>
 						<div>
