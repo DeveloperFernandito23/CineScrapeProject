@@ -3,6 +3,7 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 2vh 5vw;
     width: 90%;
+    justify-items: center;
     margin-top: 5vh;
 }
 
@@ -37,7 +38,7 @@ header {
 }
 
 .form-select {
-    width: 20vw;
+    width: 30vw;
 }
 
 .form-control {
