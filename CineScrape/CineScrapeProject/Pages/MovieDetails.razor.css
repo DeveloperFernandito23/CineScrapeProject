@@ -115,6 +115,9 @@ td {
     border-bottom: 1px solid #ddd;
 }
 
+tr:hover{
+    background-color: rgba(128, 128, 128, .2)
+}
 
 .header-info {
     font-family: cursive;
