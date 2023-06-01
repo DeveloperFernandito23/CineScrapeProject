@@ -7,7 +7,7 @@ namespace CineScrapeProject.Models
 		private enum Months { Jan, Feb, Mar, Apr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dec }
 
 
-		public static readonly string PATH = "sample-data/movies.json";
+		public static readonly string PATH = "./sample-data/movies.json";
 
 		public static string NullCritic(this int? num) => num.HasValue ? $"{num.Value}%" : "--";
 
