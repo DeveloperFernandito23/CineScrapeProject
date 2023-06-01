@@ -51,8 +51,11 @@ namespace CineScrapeProject.Pages
 
 		protected override void OnAfterRender(bool firstRender)
 		{
-			Thread.Sleep(1500);
-			_skeleton = false;
+			if (firstRender)
+			{
+				Thread.Sleep(1500);
+				_skeleton = false;
+			}
 		}
 		private void MakePagination(List<Review> allReviews)
 		{
