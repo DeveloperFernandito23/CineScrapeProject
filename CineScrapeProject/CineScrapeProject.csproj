@@ -11,6 +11,7 @@
     <Content Include="Models\Cast.cs" />
     <Content Include="Models\Movie.cs" />
     <Content Include="Models\Review.cs" />
+	<Content Include="wwwroot\service-worker-assets.js" />
   </ItemGroup>
 
 
