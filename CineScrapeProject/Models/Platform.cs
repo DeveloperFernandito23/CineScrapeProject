@@ -22,7 +22,7 @@ namespace CineScrapeProject.wwwroot.Models
 			Platform other = obj as Platform;
 			bool result = false;
 
-			if(other != null)
+			if (other != null)
 			{
 				if (Name == other.Name)
 				{

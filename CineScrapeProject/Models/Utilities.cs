@@ -1,5 +1,4 @@
 ﻿using CineScrapeProject.wwwroot.Models;
-using System.Collections.Generic;
 
 namespace CineScrapeProject.Models
 {
@@ -53,7 +52,7 @@ namespace CineScrapeProject.Models
 				{
 					string[] values = value.Split(',');
 
-					foreach(string item in values)
+					foreach (string item in values)
 						dictionary = CheckKey(dictionary, item.Trim());
 				}
 			}
