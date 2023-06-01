@@ -3,14 +3,10 @@ using ChartJs.Blazor.BarChart;
 using ChartJs.Blazor.Common;
 using ChartJs.Blazor.PieChart;
 using ChartJs.Blazor.PolarAreaChart;
-using ChartJs.Blazor.ScatterChart;
 using ChartJs.Blazor.Util;
 using CineScrapeProject.Models;
 using CineScrapeProject.wwwroot.Models;
-using System.Drawing;
 using System.Net.Http.Json;
-using System.Reflection.Emit;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CineScrapeProject.Pages
 {
@@ -321,7 +317,7 @@ namespace CineScrapeProject.Pages
 			PieDataset<int> dataset = new PieDataset<int>()
 			{
 
-				BackgroundColor =  _colorsList.Take(Stadistics.Count).ToArray()
+				BackgroundColor = _colorsList.Take(Stadistics.Count).ToArray()
 			};
 			foreach (Slot slot in Stadistics)
 			{
@@ -366,7 +362,7 @@ namespace CineScrapeProject.Pages
 				BackgroundColor = _colorsList.Take(Stadistics.Count).ToArray(),
 				Label = "Runtime of the movies"
 			};
-			foreach (Slot slot in Stadistics)	
+			foreach (Slot slot in Stadistics)
 			{
 				dataset.Add(slot.Count);
 			}

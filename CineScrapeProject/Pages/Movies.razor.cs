@@ -1,6 +1,5 @@
 using CineScrapeProject.Models;
 using CineScrapeProject.wwwroot.Models;
-using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
 
 namespace CineScrapeProject.Pages
@@ -20,7 +19,7 @@ namespace CineScrapeProject.Pages
 		private List<List<string>> _totalFilters = new();
 		private List<Movie> _moviesOn = new();
 
-			 
+
 		public List<Movie> AllMovies { get => _allMovies; set => _allMovies = value; }
 		public List<Movie> MovieList { get => _movieList; set => _movieList = value; }
 		public List<List<Movie>> FiltersMovies { get => _filtersMovies; set => _filtersMovies = value; }
@@ -95,7 +94,7 @@ namespace CineScrapeProject.Pages
 
 			Genders = AllMovies.GenderFilter();
 		}
-		
+
 		protected override async Task OnParametersSetAsync() => RestartFilters();
 
 		private void WhereSee()
@@ -139,7 +138,7 @@ namespace CineScrapeProject.Pages
 			{
 				string dateString = GetDate(movie);
 
-				if(!(dateString != null && DateTime.Parse(dateString) >= DATENOW))
+				if (!(dateString != null && DateTime.Parse(dateString) >= DATENOW))
 				{
 					bool found = false;
 
