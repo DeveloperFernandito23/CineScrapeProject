@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Models\Cast.cs" />
-    <Content Include="Models\Movie.cs" />
-    <Content Include="Models\Review.cs" />
+    <Content Include=".\Models\Cast.cs" />
+    <Content Include=".\Models\Movie.cs" />
+    <Content Include=".\Models\Review.cs" />
   </ItemGroup>
 
 
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+    <ServiceWorker Include=".\wwwroot\service-worker.js" PublishedContent=".\wwwroot\service-worker.published.js" />
   </ItemGroup>
 	
 </Project>
