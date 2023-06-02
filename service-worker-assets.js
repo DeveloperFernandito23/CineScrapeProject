@@ -13,10 +13,6 @@
       "url": "audience-img.png"
     },
     {
-      "hash": "sha256-CeTjtIAfhqYrBmT7uyQJaNZYa6aka0kT0b1A0lV3ISw=",
-      "url": "cinema.png"
-    },
-    {
       "hash": "sha256-KjLxnKU3xQ2fhsWeRK4zjRfdx4z1n\/twW3wuHnME6KU=",
       "url": "critic-img.png"
     },
@@ -69,20 +65,8 @@
       "url": "css\/open-iconic\/README.md"
     },
     {
-      "hash": "sha256-S6komS04\/ZFzqXZjadNEZHPi0OskZGYXTz1IswFfCuk=",
-      "url": "disneyplus.png"
-    },
-    {
       "hash": "sha256-mxSJuwtN0Z7NrXHXTZgR0kTWjZArhidFyUycWopkJe4=",
       "url": "favicon.png"
-    },
-    {
-      "hash": "sha256-ebhcQb+FlXipeqIP5jYIEw\/uSz+sBMWjibcTFui3sMo=",
-      "url": "HBOMax.png"
-    },
-    {
-      "hash": "sha256-3HUcA1\/uexjWo\/bZDB\/SVsTkNgEl3kIGPPs6cD54llw=",
-      "url": "hulu.png"
     },
     {
       "hash": "sha256-DbpQaq68ZSb5IoPosBErM1QWBfsbTxpJqhU0REi6wP4=",
@@ -105,20 +89,52 @@
       "url": "manifest.json"
     },
     {
+      "hash": "sha256-CeTjtIAfhqYrBmT7uyQJaNZYa6aka0kT0b1A0lV3ISw=",
+      "url": "platfoms-images\/cinema.png"
+    },
+    {
+      "hash": "sha256-S6komS04\/ZFzqXZjadNEZHPi0OskZGYXTz1IswFfCuk=",
+      "url": "platfoms-images\/disneyplus.png"
+    },
+    {
+      "hash": "sha256-ebhcQb+FlXipeqIP5jYIEw\/uSz+sBMWjibcTFui3sMo=",
+      "url": "platfoms-images\/hbomax.png"
+    },
+    {
+      "hash": "sha256-3HUcA1\/uexjWo\/bZDB\/SVsTkNgEl3kIGPPs6cD54llw=",
+      "url": "platfoms-images\/hulu.png"
+    },
+    {
       "hash": "sha256-7ImgdIJSybxOIJJTbsuzIiOwWv1\/3YPW6gcqWdPhbsY=",
-      "url": "Netflix.png"
+      "url": "platfoms-images\/netflix.png"
     },
     {
       "hash": "sha256-sLj+up0jVdMyhIgv+HRyHelIKx8G0HWkKLXXuv6C5pk=",
-      "url": "ParamountPlus.png"
+      "url": "platfoms-images\/paramountplus.png"
     },
     {
       "hash": "sha256-Lg6XH9V2U5ltpxSrFJJcHHt9G0gm0BNdbdS4kn7ViWo=",
-      "url": "peacock.png"
+      "url": "platfoms-images\/peacock.png"
     },
     {
       "hash": "sha256-ey\/BPTfBjLfTgMxMvG4YRGynZUx1s2\/58oGWrdidDzI=",
-      "url": "PrimeVideo.png"
+      "url": "platfoms-images\/primevideo.png"
+    },
+    {
+      "hash": "sha256-vMXBpVuw8Cg73kE2ZWL50t6Gjvvx\/vYR3ckGG2YIZvw=",
+      "url": "platfoms-images\/showtime.png"
+    },
+    {
+      "hash": "sha256-IkDZJKWFJQgtzpmhbY7jYdXyWyWHENysqgAQBhz\/kqY=",
+      "url": "platfoms-images\/tv.png"
+    },
+    {
+      "hash": "sha256-MinhwTpdbO8ooHWXAPQRZWjuOW97Xaa\/4XUKe5JKIQA=",
+      "url": "platfoms-images\/tvplus.png"
+    },
+    {
+      "hash": "sha256-LPdlofTRkrsum47QuBVAUPWC+wsLa10Zur8DclK29x0=",
+      "url": "platfoms-images\/vudu.png"
     },
     {
       "hash": "sha256-W17kz56\/WphTeRPksvcpTzyk5oSkTu\/MDd\/io24b9AA=",
@@ -129,28 +145,12 @@
       "url": "sample-data\/movies1.json"
     },
     {
-      "hash": "sha256-fn7vqQlgTkGG1K3U+dzSo0muWMdZ5e3uEf5klZDwz7A=",
+      "hash": "sha256-RLscJU5ACcG2hW3xXcSebYRsOZ9D5tnPeypin5srFfo=",
       "url": "service-worker.js"
     },
     {
       "hash": "sha256-do3CE360jHDhqZsZzSqVvZT4V5hVfG3yXf7Rfnaowqg=",
       "url": "service-worker.published.js"
-    },
-    {
-      "hash": "sha256-vMXBpVuw8Cg73kE2ZWL50t6Gjvvx\/vYR3ckGG2YIZvw=",
-      "url": "showtime.png"
-    },
-    {
-      "hash": "sha256-IkDZJKWFJQgtzpmhbY7jYdXyWyWHENysqgAQBhz\/kqY=",
-      "url": "Tv.png"
-    },
-    {
-      "hash": "sha256-MinhwTpdbO8ooHWXAPQRZWjuOW97Xaa\/4XUKe5JKIQA=",
-      "url": "TVPlus.png"
-    },
-    {
-      "hash": "sha256-LPdlofTRkrsum47QuBVAUPWC+wsLa10Zur8DclK29x0=",
-      "url": "vudu.png"
     },
     {
       "hash": "sha256-lOCs45frNf+D7me6lKLgUhRCdt4VwHCp9H6Ct+YWzfs=",
@@ -177,7 +177,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-jqRhBG3KHEF\/sa4dlDGq6R6IJ7H2AIm5x5UTnHMHdUc=",
+      "hash": "sha256-luyCvUaDcKBxTOGoO1AOUC81MJMyh0jxyZZbWLDbpyg=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -189,7 +189,7 @@
       "url": "_framework\/ChartJs.Blazor.dll"
     },
     {
-      "hash": "sha256-Dji+NiFZCc3+9Ajj+VUI6pEhhvRgMK0dRHYsdsplRwY=",
+      "hash": "sha256-FEiHs7kY29vyhBrlsnViAjL8A9rqwxBQ+xzBSvYaYw4=",
       "url": "_framework\/CineScrapeProject.dll"
     },
     {
@@ -413,7 +413,7 @@
       "url": "_framework\/dotnet.7.0.5.gkjsoll1rr.js"
     },
     {
-      "hash": "sha256-NkgyY5mXbT6XuInXYd4NUKwyzaDXSgQjS9C\/hU3Y2S8=",
+      "hash": "sha256-9a4SKsMt1iCkuCP22AOUNbVg6gOK8dPQwQ87NJE2AU8=",
       "url": "_framework\/dotnet.wasm"
     },
     {
@@ -437,5 +437,5 @@
       "url": "_content\/ChartJs.Blazor.Fork\/ChartJsBlazorInterop.js"
     }
   ],
-  "version": "FUtKUPgv"
+  "version": "umQMtDZn"
 };
