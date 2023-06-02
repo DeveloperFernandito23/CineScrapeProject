@@ -89,6 +89,10 @@
       "url": "manifest.json"
     },
     {
+      "hash": "sha256-7ImgdIJSybxOIJJTbsuzIiOwWv1\/3YPW6gcqWdPhbsY=",
+      "url": "Netflix.png"
+    },
+    {
       "hash": "sha256-CeTjtIAfhqYrBmT7uyQJaNZYa6aka0kT0b1A0lV3ISw=",
       "url": "platfoms-images\/Cinema.png"
     },
@@ -103,10 +107,6 @@
     {
       "hash": "sha256-3HUcA1\/uexjWo\/bZDB\/SVsTkNgEl3kIGPPs6cD54llw=",
       "url": "platfoms-images\/hulu.png"
-    },
-    {
-      "hash": "sha256-7ImgdIJSybxOIJJTbsuzIiOwWv1\/3YPW6gcqWdPhbsY=",
-      "url": "platfoms-images\/netflix.png"
     },
     {
       "hash": "sha256-sLj+up0jVdMyhIgv+HRyHelIKx8G0HWkKLXXuv6C5pk=",
@@ -145,7 +145,7 @@
       "url": "sample-data\/movies1.json"
     },
     {
-      "hash": "sha256-3sVeNKK5LVKDnvQVfHPKIgAR8cLoJ7gZGrJKH4bj52w=",
+      "hash": "sha256-oFnEOC9qj+0diTwo+6GZCseGEolDRykg7b97i9D5fL0=",
       "url": "service-worker.js"
     },
     {
@@ -437,5 +437,5 @@
       "url": "_content\/ChartJs.Blazor.Fork\/ChartJsBlazorInterop.js"
     }
   ],
-  "version": "uLM7I5S9"
+  "version": "ZzkXrgkJ"
 };
