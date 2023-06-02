@@ -76,7 +76,7 @@
 			@foreach (var item in Movie.Platforms)
 			{
 				<div class="platform">
-					<a href="@item.UrlSite"><img class="platform-image rounded-circle" alt="@item.Name" src="./platfoms-images/@(item.Name.Replace(" ", "").Replace("+", "Plus").ToLower()).png" /></a>
+					<a href="@item.UrlSite"><img class="platform-image rounded-circle" alt="@item.Name" src="./platfoms-images/@((item.Name.Replace(" ", "").Replace("+", "Plus")).ToLower()).png" /></a>
 				</div>
 			}
 		</div>
