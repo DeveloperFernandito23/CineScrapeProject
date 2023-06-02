@@ -17,7 +17,7 @@
       "url": "critic-img.png"
     },
     {
-      "hash": "sha256-ls7GOjr5DdN8YInkC4FYg\/J91Virrn20wPR6xWTvoYY=",
+      "hash": "sha256-LCK8eTCOXtrAmYALBFLTjo5KT6YfU8L3jEWe1gebPKo=",
       "url": "css\/app.css"
     },
     {
@@ -145,7 +145,7 @@
       "url": "sample-data\/movies1.json"
     },
     {
-      "hash": "sha256-rw0XnrbQiZYP77hWlvVPn8woyJO+QHg6ta1mTc3/LD8=",
+      "hash": "sha256-Sfc6xmf/gvaj1XLi+SGY+W9gmH7UAD9kC5b01dddAxU=",
       "url": "service-worker.js"
     },
     {
@@ -437,5 +437,5 @@
       "url": "_content\/ChartJs.Blazor.Fork\/ChartJsBlazorInterop.js"
     }
   ],
-  "version": "ea7Dp7Oz"
+  "version": "IfDxZhsI"
 };
