@@ -94,7 +94,7 @@
     },
     {
       "hash": "sha256-S6komS04\/ZFzqXZjadNEZHPi0OskZGYXTz1IswFfCuk=",
-      "url": "platfoms-images\/Disney.png"
+      "url": "platfoms-images\/DisneyPlus.png"
     },
     {
       "hash": "sha256-ebhcQb+FlXipeqIP5jYIEw\/uSz+sBMWjibcTFui3sMo=",
@@ -110,7 +110,7 @@
     },
     {
       "hash": "sha256-sLj+up0jVdMyhIgv+HRyHelIKx8G0HWkKLXXuv6C5pk=",
-      "url": "platfoms-images\/Paramount.png"
+      "url": "platfoms-images\/ParamountPlus.png"
     },
     {
       "hash": "sha256-Lg6XH9V2U5ltpxSrFJJcHHt9G0gm0BNdbdS4kn7ViWo=",
@@ -145,7 +145,7 @@
       "url": "sample-data\/movies1.json"
     },
     {
-      "hash": "sha256-Sfc6xmf/gvaj1XLi+SGY+W9gmH7UAD9kC5b01dddAxU=",
+      "hash": "sha256-3sVeNKK5LVKDnvQVfHPKIgAR8cLoJ7gZGrJKH4bj52w=",
       "url": "service-worker.js"
     },
     {
@@ -177,7 +177,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-4v1RRxClJ1hTqLorGSX8X4HwFaZ7XmFq0IpPAIY06U8=",
+      "hash": "sha256-jqRhBG3KHEF\/sa4dlDGq6R6IJ7H2AIm5x5UTnHMHdUc=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -189,7 +189,7 @@
       "url": "_framework\/ChartJs.Blazor.dll"
     },
     {
-      "hash": "sha256-7o3grEjdaJ5leuUiE87rJQA7cj\/6hjO12feuprexECc=",
+      "hash": "sha256-Dji+NiFZCc3+9Ajj+VUI6pEhhvRgMK0dRHYsdsplRwY=",
       "url": "_framework\/CineScrapeProject.dll"
     },
     {
@@ -413,7 +413,7 @@
       "url": "_framework\/dotnet.7.0.5.gkjsoll1rr.js"
     },
     {
-      "hash": "sha256-n132G5tPxmfLfCj1ZUnyISf4PUlQ+eTznwBw7Km05Lw=",
+      "hash": "sha256-NkgyY5mXbT6XuInXYd4NUKwyzaDXSgQjS9C\/hU3Y2S8=",
       "url": "_framework\/dotnet.wasm"
     },
     {
@@ -437,5 +437,5 @@
       "url": "_content\/ChartJs.Blazor.Fork\/ChartJsBlazorInterop.js"
     }
   ],
-  "version": "IfDxZhsI"
+  "version": "uLM7I5S9"
 };
