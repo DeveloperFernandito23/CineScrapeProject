@@ -1,5 +1,6 @@
 ﻿@page "/movies"
 @inject HttpClient Http
+@inject NavigationManager MyNavigationManager
 @using CineScrapeProject.Models;
 
 <PageTitle>Movies | CineScrape</PageTitle>
@@ -60,7 +61,7 @@
 					</div>
 				</div>
 			</div>*@
-			<a href="movies/@item.Id">
+			<a href="@(MyNavigationManager.Uri)/@item.Id">
 				<div class="card" style="width: 12rem;">
 					<img src="@item.PosterURL" class="card-img-top" alt="...">
 					<div class="card-body">
