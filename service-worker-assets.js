@@ -145,7 +145,7 @@
       "url": "sample-data\/movies1.json"
     },
     {
-      "hash": "sha256-RLscJU5ACcG2hW3xXcSebYRsOZ9D5tnPeypin5srFfo=",
+      "hash": "sha256-yfdau13Q8eX1LkM6ajCsL/xSY7Sct3bgjoY4F221E+g=",
       "url": "service-worker.js"
     },
     {
@@ -177,7 +177,7 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-luyCvUaDcKBxTOGoO1AOUC81MJMyh0jxyZZbWLDbpyg=",
+      "hash": "sha256-jqRhBG3KHEF\/sa4dlDGq6R6IJ7H2AIm5x5UTnHMHdUc=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -189,7 +189,7 @@
       "url": "_framework\/ChartJs.Blazor.dll"
     },
     {
-      "hash": "sha256-FEiHs7kY29vyhBrlsnViAjL8A9rqwxBQ+xzBSvYaYw4=",
+      "hash": "sha256-Dji+NiFZCc3+9Ajj+VUI6pEhhvRgMK0dRHYsdsplRwY=",
       "url": "_framework\/CineScrapeProject.dll"
     },
     {
@@ -413,7 +413,7 @@
       "url": "_framework\/dotnet.7.0.5.gkjsoll1rr.js"
     },
     {
-      "hash": "sha256-9a4SKsMt1iCkuCP22AOUNbVg6gOK8dPQwQ87NJE2AU8=",
+      "hash": "sha256-NkgyY5mXbT6XuInXYd4NUKwyzaDXSgQjS9C\/hU3Y2S8=",
       "url": "_framework\/dotnet.wasm"
     },
     {
@@ -437,5 +437,5 @@
       "url": "_content\/ChartJs.Blazor.Fork\/ChartJsBlazorInterop.js"
     }
   ],
-  "version": "umQMtDZn"
+  "version": "v5lpxBh9"
 };
