@@ -13,6 +13,10 @@
       "url": "audience-img.png"
     },
     {
+      "hash": "sha256-CeTjtIAfhqYrBmT7uyQJaNZYa6aka0kT0b1A0lV3ISw=",
+      "url": "cinema.png"
+    },
+    {
       "hash": "sha256-KjLxnKU3xQ2fhsWeRK4zjRfdx4z1n\/twW3wuHnME6KU=",
       "url": "critic-img.png"
     },
@@ -65,8 +69,20 @@
       "url": "css\/open-iconic\/README.md"
     },
     {
+      "hash": "sha256-S6komS04\/ZFzqXZjadNEZHPi0OskZGYXTz1IswFfCuk=",
+      "url": "disneyplus.png"
+    },
+    {
       "hash": "sha256-mxSJuwtN0Z7NrXHXTZgR0kTWjZArhidFyUycWopkJe4=",
       "url": "favicon.png"
+    },
+    {
+      "hash": "sha256-ebhcQb+FlXipeqIP5jYIEw\/uSz+sBMWjibcTFui3sMo=",
+      "url": "HBOMax.png"
+    },
+    {
+      "hash": "sha256-3HUcA1\/uexjWo\/bZDB\/SVsTkNgEl3kIGPPs6cD54llw=",
+      "url": "hulu.png"
     },
     {
       "hash": "sha256-DbpQaq68ZSb5IoPosBErM1QWBfsbTxpJqhU0REi6wP4=",
@@ -93,48 +109,16 @@
       "url": "Netflix.png"
     },
     {
-      "hash": "sha256-CeTjtIAfhqYrBmT7uyQJaNZYa6aka0kT0b1A0lV3ISw=",
-      "url": "platfoms-images\/Cinema.png"
-    },
-    {
-      "hash": "sha256-S6komS04\/ZFzqXZjadNEZHPi0OskZGYXTz1IswFfCuk=",
-      "url": "platfoms-images\/DisneyPlus.png"
-    },
-    {
-      "hash": "sha256-ebhcQb+FlXipeqIP5jYIEw\/uSz+sBMWjibcTFui3sMo=",
-      "url": "platfoms-images\/HBOMax.png"
-    },
-    {
-      "hash": "sha256-3HUcA1\/uexjWo\/bZDB\/SVsTkNgEl3kIGPPs6cD54llw=",
-      "url": "platfoms-images\/hulu.png"
-    },
-    {
       "hash": "sha256-sLj+up0jVdMyhIgv+HRyHelIKx8G0HWkKLXXuv6C5pk=",
-      "url": "platfoms-images\/ParamountPlus.png"
+      "url": "ParamountPlus.png"
     },
     {
       "hash": "sha256-Lg6XH9V2U5ltpxSrFJJcHHt9G0gm0BNdbdS4kn7ViWo=",
-      "url": "platfoms-images\/peacock.png"
+      "url": "peacock.png"
     },
     {
       "hash": "sha256-ey\/BPTfBjLfTgMxMvG4YRGynZUx1s2\/58oGWrdidDzI=",
-      "url": "platfoms-images\/PrimeVideo.png"
-    },
-    {
-      "hash": "sha256-vMXBpVuw8Cg73kE2ZWL50t6Gjvvx\/vYR3ckGG2YIZvw=",
-      "url": "platfoms-images\/showtime.png"
-    },
-    {
-      "hash": "sha256-IkDZJKWFJQgtzpmhbY7jYdXyWyWHENysqgAQBhz\/kqY=",
-      "url": "platfoms-images\/Tv.png"
-    },
-    {
-      "hash": "sha256-MinhwTpdbO8ooHWXAPQRZWjuOW97Xaa\/4XUKe5JKIQA=",
-      "url": "platfoms-images\/TVplus.png"
-    },
-    {
-      "hash": "sha256-LPdlofTRkrsum47QuBVAUPWC+wsLa10Zur8DclK29x0=",
-      "url": "platfoms-images\/vudu.png"
+      "url": "PrimeVideo.png"
     },
     {
       "hash": "sha256-W17kz56\/WphTeRPksvcpTzyk5oSkTu\/MDd\/io24b9AA=",
@@ -145,12 +129,28 @@
       "url": "sample-data\/movies1.json"
     },
     {
-      "hash": "sha256-oFnEOC9qj+0diTwo+6GZCseGEolDRykg7b97i9D5fL0=",
+      "hash": "sha256-fn7vqQlgTkGG1K3U+dzSo0muWMdZ5e3uEf5klZDwz7A=",
       "url": "service-worker.js"
     },
     {
       "hash": "sha256-do3CE360jHDhqZsZzSqVvZT4V5hVfG3yXf7Rfnaowqg=",
       "url": "service-worker.published.js"
+    },
+    {
+      "hash": "sha256-vMXBpVuw8Cg73kE2ZWL50t6Gjvvx\/vYR3ckGG2YIZvw=",
+      "url": "showtime.png"
+    },
+    {
+      "hash": "sha256-IkDZJKWFJQgtzpmhbY7jYdXyWyWHENysqgAQBhz\/kqY=",
+      "url": "Tv.png"
+    },
+    {
+      "hash": "sha256-MinhwTpdbO8ooHWXAPQRZWjuOW97Xaa\/4XUKe5JKIQA=",
+      "url": "TVPlus.png"
+    },
+    {
+      "hash": "sha256-LPdlofTRkrsum47QuBVAUPWC+wsLa10Zur8DclK29x0=",
+      "url": "vudu.png"
     },
     {
       "hash": "sha256-lOCs45frNf+D7me6lKLgUhRCdt4VwHCp9H6Ct+YWzfs=",
@@ -437,5 +437,5 @@
       "url": "_content\/ChartJs.Blazor.Fork\/ChartJsBlazorInterop.js"
     }
   ],
-  "version": "ZzkXrgkJ"
+  "version": "FUtKUPgv"
 };
